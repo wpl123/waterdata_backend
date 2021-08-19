@@ -1,0 +1,51 @@
+version: "3.7"
+
+services:
+
+  mariadb:
+#   image: wplpps/waterdata_mariadb:latest
+    build: './mariadb'
+#   image: mariadb:latest
+    container_name: waterdata_mariadb_1
+    restart: always
+    environment:
+      - MYSQL_DATABASE=waterdata
+      - MYSQL_ROOT_PASSWORD=water
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=water
+      - TZ=Australia/Brisbane
+   
+    ports:
+      - 30000:3306
+    networks:
+      - backend
+  
+    volumes:
+      - ./database:/var/lib/mysql
+      - ./dbtmp:/dbtmp/mysqltmp
+      - ./data:/data
+      - ./app:/app
+      - ./mariadb:/docker-entrypoint-initdb.d/:ro
+
+  adminer:
+    image: adminer
+#   restart: always
+    ports:
+      - 8182:8080
+    networks:
+      - frontend
+      - backend
+    volumes:
+      - ./data:/data
+
+
+networks:
+  backend:
+  frontend:
+
+volumes:
+  database:
+  data:
+  mariadb:
+
+

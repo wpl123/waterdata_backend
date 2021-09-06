@@ -3,6 +3,7 @@ import pymysql
 import pandas as pd
 import os, glob, datetime, csv
 import logging
+import inspect
 import re
 
 from datetime import date, timedelta
@@ -33,7 +34,7 @@ def checkDate(y,m,d):
 
 def rainfallFormat(mysql, meter_no, downloads_dir, uploads_dir):
     
-    logging.info(' Data format started ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+    logging.info(inspect.stack()[0][3] + ' Data format started ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
 
     localdate = datetime.datetime.now().strftime('%Y-%m-%d')
     
@@ -95,7 +96,7 @@ def rainfallFormat(mysql, meter_no, downloads_dir, uploads_dir):
 
             writer.writerow(map(lambda x: x, row))
 
-    logging.info(' Data format ended ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+    logging.info(inspect.stack()[0][3] + ' Data format of ' + formatted_csvfile + ' ended ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
     return(formatted_csvfile)
 
 
@@ -103,7 +104,7 @@ def rainfallFormat(mysql, meter_no, downloads_dir, uploads_dir):
 
 def loadFormatted(mysql, meter_no, downloads_dir, uploads_dir, formatted_csvfile):
 
-    logging.info(' Data load started ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+    logging.info(inspect.stack()[0][3] + ' Data load started ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
     
     df2 = pd.read_csv(formatted_csvfile, index_col=False, header=None, skiprows=2,engine='python')
 
@@ -128,9 +129,9 @@ def loadFormatted(mysql, meter_no, downloads_dir, uploads_dir, formatted_csvfile
             
             result2 = mysql.execSQL(sql3)          # insert row
             if result2 == False:
-                logging.error(' Insert failed meter_no: {0} date: {1} {2} '.format(df2.iloc[i,1],df2.iloc[i,2],datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')))
+                logging.error(inspect.stack()[0][3] + ' Insert failed meter_no: {0} date: {1} {2} '.format(df2.iloc[i,1],df2.iloc[i,2],datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')))
         else:
-            logging.info(' Skipping duplicate id:' + str(dup_id) + " meter_no:" + df2.iloc[i,1] + " date:" + str(df2.iloc[i,2]) + " " + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+            logging.info(inspect.stack()[0][3] + ' Skipping duplicate id:' + str(dup_id) + " meter_no:" + df2.iloc[i,1] + " date:" + str(df2.iloc[i,2]) + " " + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
                 
     return result2
 
@@ -159,7 +160,7 @@ def rainfallLoad(meter_no, downloads_dir, uploads_dir, logs_dir):
             upload_file   = formatted_csvfile
             move_upload   = moveFile(upload_file, upload_hist) # move formatted file and uploaded file to a new directory download_hist and upload_hist subdirectory
     else:
-        logging.error('No download file for ' + meter_no + ' ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+        logging.error(inspect.stack()[0][3] + 'No formated csvfile for ' + meter_no + ' ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
 
     mysql.dbClose()
 

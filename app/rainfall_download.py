@@ -44,6 +44,7 @@ logs_dir = ""
 def rainfall_scrape_and_write(meter_no, download_url, last_download, downloads_dir, logs_dir):
 
     setupLogging(meter_no, logs_dir)
+    screenshots_dir = logs_dir + "screenshots/"
     
     yesterday = datetime.datetime.today() - timedelta(days=1)
     sdate = check_start_end_dates('rainfall', meter_no)
@@ -60,7 +61,7 @@ def rainfall_scrape_and_write(meter_no, download_url, last_download, downloads_d
     driver = webdriver.Chrome(options=chrome_options)    # change the <path_to_place_downloaded_file> to your directory where you would like to place the downloaded file
 
     driver.get(download_url)
-    driver.save_screenshot(logs_dir + meter_no + '_' + 'image0.png')
+    driver.save_screenshot(screenshots_dir + meter_no + '_' + 'image0.png')
     # print("Page title was '{}'".format(driver.title))
 
     # WebDriverWait(driver, 20).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH,"//iframe[@id='webhyd']")))
@@ -70,7 +71,7 @@ def rainfall_scrape_and_write(meter_no, download_url, last_download, downloads_d
 
     #ready = WebDriverWait(driver,20).until(EC.presence_of_element_located((By.XPATH,"//table[@id='dataTable']"))) 
     ready = WebDriverWait(driver,20).until(EC.presence_of_element_located((By.XPATH,"//*[@id='dataTable']"))) 
-    driver.save_screenshot(logs_dir + meter_no + '_' + 'image1.png')
+    driver.save_screenshot(screenshots_dir + meter_no + '_' + 'image1.png')
 
     dropdown = driver.find_element(By.ID, 'p_startYear')
     startyearSelect = Select(dropdown)     #.text.splitlines() 
@@ -78,7 +79,7 @@ def rainfall_scrape_and_write(meter_no, download_url, last_download, downloads_d
 
     table = driver.find_element(By.XPATH, "//table[@id='dataTable']")
 
-    driver.save_screenshot(logs_dir + meter_no + '_' + 'image2.png')
+    driver.save_screenshot(screenshots_dir + meter_no + '_' + 'image2.png')
 
     with open(downloads_dir + meter_no + '_' + str(startyear) + '_' + ldate + '.csv', 'w', newline='') as csvfile:
         wr = csv.writer(csvfile)
@@ -90,7 +91,7 @@ def rainfall_scrape_and_write(meter_no, download_url, last_download, downloads_d
         for row in table.find_elements_by_css_selector('tr'):
             wr.writerow([d.text for d in row.find_elements_by_css_selector('td')])
 
-    driver.save_screenshot(logs_dir + meter_no + '_' + 'image3.png')
+    driver.save_screenshot(screenshots_dir + meter_no + '_' + 'image3.png')
 
     driver.quit()
 

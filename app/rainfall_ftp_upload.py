@@ -39,7 +39,8 @@ def rainfallFormat(mysql, meter_no, downloads_dir, uploads_dir):
     files = glob.glob(downloads_dir + meter_no + '*') #e.g.  /home/admin/dockers/waterdata_backend/data/downloads/54151.*
 
     if files == []:
-        return None
+        df2 = pd.DataFrame()
+        return df2
 
     df1 = pd.concat([pd.read_csv(fp).assign(filename=os.path.basename(fp)) for fp in files])
     
@@ -111,7 +112,8 @@ def loadFormatted(mysql, meter_no, df):
     return result2
 
 
-
+# Mt Kaputar http://www.bom.gov.au/jsp/ncc/cdio/weatherData/av?p_nccObsCode=136&p_display_type=dailyDataFile&p_startYear=&p_c=&p_stn_num=054151
+# Mt Lindsay http://www.bom.gov.au/jsp/ncc/cdio/weatherData/av?p_nccObsCode=136&p_display_type=dailyDataFile&p_startYear=&p_c=&p_stn_num=054021
 
 def rainfallLoad(meter_no, params, downloads_dir, uploads_dir, logs_dir):
 
@@ -122,16 +124,21 @@ def rainfallLoad(meter_no, params, downloads_dir, uploads_dir, logs_dir):
     
     df_formatted = rainfallFormat(mysql, meter_no, downloads_dir, uploads_dir)
     
-    if len(df_formatted) >= 0: #not empty
+    if df_formatted.empty == False: #not empty
         
         rf_load = loadFormatted(mysql, meter_no, df_formatted)
         
         if rf_load == True:
             upd_meter = updateMeter(mysql, meter_no)     # update meter record with the read date
 
-            download_hist = downloads_dir + 'download_hist'
-            download_file = downloads_dir + params
-            move_download = moveFile(download_file, download_hist)
+        download_hist = downloads_dir + 'download_hist'
+        download_file = downloads_dir + params
+        move_download = moveFile(download_file, download_hist)
+
+#        if meter_no == '054021-1':#TODO: Fix hard coding of last rainfall meter check before moving files
+        upload_hist   = uploads_dir + 'upload_hist'
+        upload_file   = downloads_dir + meter_no + '*'  
+        move_upload   = moveFile(upload_file, upload_hist) # move formatted file and uploaded file to a new directory download_hist and upload_hist subdirectory
     else:
         logging.error(inspect.stack()[0][3] + 'No download file for ' + meter_no + ' ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
 

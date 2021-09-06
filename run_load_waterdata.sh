@@ -9,8 +9,24 @@ UPLOADDIR=/home/admin/dockers/waterdata_backend/data/uploads/cronlog
 #SHELL=/bin/bash
 #*/10 * * * * root source /path/to/virtualenv/bin/activate && /path/to/build/manage.py some_command > /dev/null
 
+# /home/admin/dockers/waterdata_backend/venv/bin/python -m smtpd -c DebuggingServer -n localhost:1025 && \
 
-source /home/admin/dockers/waterdata_backend/venv/bin/activate && /home/admin/dockers/waterdata_backend/venv/bin/python /home/admin/dockers/waterdata_backend/app/wrapper_download.py >> $DOWNLOADDIR/download_error.log 2>&1
-source /home/admin/dockers/waterdata_backend/venv/bin/activate && /home/admin/dockers/waterdata_backend/venv/bin/python /home/admin/dockers/waterdata_backend/app/wrapper_upload.py >> $UPLOADDIR/upload_error.log 2>&1
+/home/admin/dockers/waterdata_backend/venv/bin/python -m smtpd -c DebuggingServer -n localhost:1025 >> /home/admin/dockers/waterdata_backend/data/downloads/cronlog/cron.log 2>&1 &
+PID=$!
 
+date >> $DOWNLOADDIR/download_error.log 2>&1
+echo "--------------------------------------------------------------------------------------" >> $DOWNLOADDIR/download_error.log 2>&1
+source /home/admin/dockers/waterdata_backend/venv/bin/activate && \
+/home/admin/dockers/waterdata_backend/venv/bin/python /home/admin/dockers/waterdata_backend/app/wrapper_download.py \
+>> $DOWNLOADDIR/download_error.log 2>&1
+echo "--------------------------------------------------------------------------------------" >> $DOWNLOADDIR/download_error.log 2>&1
+
+date >> $UPLOADDIR/upload_error.log 2>&1
+echo "--------------------------------------------------------------------------------------" >> $UPLOADDIR/upload_error.log 2>&1
+source /home/admin/dockers/waterdata_backend/venv/bin/activate && \
+/home/admin/dockers/waterdata_backend/venv/bin/python /home/admin/dockers/waterdata_backend/app/wrapper_upload.py \
+>> $UPLOADDIR/upload_error.log 2>&1
+echo "--------------------------------------------------------------------------------------" >> $UPLOADDIR/upload_error.log 2>&1
+
+kill -9 $PID
 

@@ -13,11 +13,11 @@ from dbutils import *
 
 
 
-meter_no = ""
-download_url = ""
-last_download = datetime.datetime.now()
-downloads_dir = ""
-logs_dir = ""
+# meter_no = ""
+# download_url = ""
+# last_download = datetime.datetime.now()
+# downloads_dir = ""
+# logs_dir = ""
 
 
 def write_csv(fname,df_to_csv):
@@ -84,7 +84,7 @@ def ftp_extract(ftp,meter_no,params,downloads_dir):
     return df_loaded
 
 
-def rainfall_scrape_and_write(meter_no, download_url, params,last_download, downloads_dir, logs_dir):
+def rainfall_scrape_and_write(meter_no, download_url, params, downloads_dir, logs_dir):
 
     setupLogging(meter_no, logs_dir)
     
@@ -97,9 +97,6 @@ def rainfall_scrape_and_write(meter_no, download_url, params,last_download, down
     ftp.quit()
     fname = get_fname(downloads_dir, meter_no,ldate)
     status = write_csv(fname, df_loaded)
-    
-    
-    #TODO Add Params to other downloads
-    #TODO: Load Rainfall
+   
    
     logging.info(inspect.stack()[0][3] + ' FTP session ended ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))

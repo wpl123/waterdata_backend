@@ -1,3 +1,3 @@
 #43 15 * * * root /run_load_waterdata.sh >> /var/log/cron.log 2>&1
 # Modified 19.8.2021 to run on VM instead of docker container
-43 06 * * * /home/admin/dockers/waterdata_backend/run_load_waterdata.sh >> /var/log/cron.log 2>&1
+43 06 * * * /home/admin/dockers/waterdata_backend/run_load_waterdata.sh >> /home/admin/dockers/waterdata_backend/data/downloads/cronlog/cron.log 2>&1

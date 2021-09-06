@@ -4,7 +4,8 @@
 app/.vscode
 app/__pycache__
 app-api/__pycache__
-app/gibbo_code/downloads
+app/dev/gibbo_code/downloads
+app/dev/realtimewater_api/data/test/downloads
 database/
 venv/
 data/downloads
@@ -14,8 +15,9 @@ data/waterdata
 data_csvs
 data/webscraping
 dockerfiles/mariadb/initialize-database.sql
-dockerfiles/mariadb/initialize-database.sql.old
+dockerfiles/mariadb/initialize-database.sql.bak
 dockerfiles/mariadb/src/initialize-database.sql
+dockerfiles/mariadb/src/initialize-database.sql.bak
 app/formatting_scripts_rand
 app/loading_scripts_rand
 bkup
@@ -24,3 +26,5 @@ workspace.code-workspace
 vendor
 pytorch_tut
 
+data/visualisations/elfin.csv
+data/visualisations/greengully.csv

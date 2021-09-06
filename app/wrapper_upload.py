@@ -18,6 +18,7 @@ workingdir = "/home/admin/dockers/waterdata_backend/app/"
 
 from datetime import date
 from flutils import *
+from emutils import *
 
 from groundwater_2col_upload import *
 from groundwater_3col_upload import *
@@ -64,7 +65,8 @@ def load_webdata(df):
     downloads_dir = "/home/admin/dockers/waterdata_backend/data/downloads/"
     uploads_dir = "/home/admin/dockers/waterdata_backend/data/uploads/"
     logs_dir = "/home/admin/dockers/waterdata_backend/data/uploads/logs/"
-    
+    logfile = logs_dir + str(datetime.datetime.now().strftime('%Y%m%d%H%M%S')) + ".log"
+
     check_file_writable(uploads_dir)
     check_file_writable(logs_dir)
 
@@ -73,26 +75,30 @@ def load_webdata(df):
         # print(i, df.iloc[i, 1])
 
         if df.iloc[i, 3] == 0:             # test
-            pass # print("test_format(df.iloc[i,10], df.iloc[i,11]), workingdir")        #TODO
+            pass # print("test_format(df.iloc[i,10], df.iloc[i,11]), workingdir")       
         elif df.iloc[i, 3] == 1:        # Stream flow. Pass meter_no, downloads_dir, uploads_dir, logs_dir
-            pass # surfacewaterLoad(df.iloc[i,1], downloads_dir, uploads_dir, logs_dir)
+            surfacewaterLoad(df.iloc[i,1], downloads_dir, uploads_dir, logs_dir)
         elif df.iloc[i, 3] == 2:        # Groundwater 2 column
-            pass # groundwater2colLoad(df.iloc[i,1], downloads_dir, uploads_dir, logs_dir) 
+            groundwater2colLoad(df.iloc[i,1], downloads_dir, uploads_dir, logs_dir) 
         elif df.iloc[i, 3] == 3:        # Groundwater 3 column
-            pass # groundwater3colLoad(df.iloc[i,1], downloads_dir, uploads_dir, logs_dir)
+            groundwater3colLoad(df.iloc[i,1], downloads_dir, uploads_dir, logs_dir)
         elif df.iloc[i, 3] == 4:        # Rainfall column
             rainfallLoad(df.iloc[i,1], df.iloc[i,11],downloads_dir, uploads_dir, logs_dir)
         else:
             pass
 
-    #    time.sleep(1)    
-
+        time.sleep(1)    
+    return logfile 
 
 
 def main():
     meter_df = get_meter_data()
-    load_webdata(meter_df)
-
+    log = load_webdata(meter_df)
+    
+    if check_logfile(log) == True:
+        assemble_email(log, 'ERROR: Waterdata database load errors found')
+    # else:
+    #     assemble_email(log, 'SUCCESS: Waterdata database load successful')
 
 if __name__ == "__main__":
     main()

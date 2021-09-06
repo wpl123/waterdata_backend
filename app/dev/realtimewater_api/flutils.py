@@ -29,12 +29,12 @@ def moveFile(fnm, dnm):
                 logging.info(inspect.stack()[0][3] + ' File {0} moved to directory {1} at {2}'.format(file,dnm,datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')))
                 result = True
             except Exception as e:
-                logging.info(inspect.stack()[0][3] + ' File could not be moved to directory. Error was ' + str(e))
+                logging.info(inspect.stack()[0][3] + ' File couldn\'t be moved to directory. Error was ' + str(e))
                 result = False    
             return result
     else:
         return False
-#        logging.error(inspect.stack()[0][3] + ' File {0} could not be moved to directory {1} at {2} '.format(file,dnm,datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')))    
+        logging.error(inspect.stack()[0][3] + ' File {0} couldn\'t be moved to directory {1} at {2} '.format(file,dnm,datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')))    
 
 
 def check_dir_writable(dnm):
@@ -59,22 +59,3 @@ def check_file_writable(fnm):
     
 
 
-def del_files(_directory, _fname):
-    result = False
-    if os.path.exists(_directory):
-        for file in glob.glob(_directory + _fname):
-            os.remove(file)
-
-        result = True    
-    return result
-
-def check_logfile(_logfile):
-
-    file1 = open(_logfile, "r")
-    readfile = file1.read()
-    if 'error' in readfile or 'ERROR' in readfile or 'Error' in readfile: 
-        _error_flag = True
-    else: 
-        _error_flag = False 
-    file1.close()
-    return _error_flag

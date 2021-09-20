@@ -18,20 +18,26 @@ def setupLogging(meter_no, logs_dir):
 
 
 
-def moveFile(fnm, dnm):
-    logging.info(inspect.stack()[0][3] + ' Inside moveFile: filename {0} directory name {1} at {2}'.format(fnm,dnm,datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')))
+def moveFile(fnm, dnm):  
+    logging.info(inspect.stack()[0][3] + ' Moving Filename {0} to directory name {1} at {2}'.format(fnm,dnm,datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')))
     dir_writeable = check_dir_writable(dnm)
+    result = False
 
     if dir_writeable == True:
         for file in glob.glob(fnm):
             try:
-                shutil.move(file, dnm)
+                chk_file = dnm + '/' + os.path.basename(file)
+                logging.info(inspect.stack()[0][3] + ' Check if {0} exists at {1}'.format(chk_file,datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')))
+                if os.path.exists(chk_file):                     # check if that filename already exists in the destination directory   
+                    logging.info(inspect.stack()[0][3] + ' File {0} exists. Moving to {0}.new at {1}'.format(chk_file,datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')))
+                    chk_file = chk_file + ".new"                 # move to a different name
+                shutil.move(file, chk_file)
                 logging.info(inspect.stack()[0][3] + ' File {0} moved to directory {1} at {2}'.format(file,dnm,datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')))
                 result = True
             except Exception as e:
-                logging.info(inspect.stack()[0][3] + ' File could not be moved to directory. Error was ' + str(e))
+                logging.error(inspect.stack()[0][3] + ' File could not be moved to directory. Error was ' + str(e))
                 result = False    
-            return result
+        return result
     else:
         return False
 #        logging.error(inspect.stack()[0][3] + ' File {0} could not be moved to directory {1} at {2} '.format(file,dnm,datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')))    
@@ -67,6 +73,7 @@ def del_files(_directory, _fname):
 
         result = True    
     return result
+
 
 def check_logfile(_logfile):
 

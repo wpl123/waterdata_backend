@@ -1,0 +1,93 @@
+version: "3.7"
+
+services:
+
+  mariadb:
+#   image: wplpps/waterdata_mariadb:latest
+    build: './dockerfiles/mariadb'
+#   image: mariadb:latest
+    container_name: waterdata_mariadb_1
+    restart: always
+    environment:
+      - MYSQL_DATABASE=waterdata
+      - MYSQL_ROOT_PASSWORD=water
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=water
+      - TZ=Australia/Brisbane
+   
+    ports:
+      - 30000:3306
+    networks:
+      - backend
+  
+    volumes:
+      - ./database:/var/lib/mysql
+      - ./dbtmp:/dbtmp/mysqltmp
+      - ./data:/data
+      - /home/admin/dockers/waterdata_backend:/waterdata_backend
+      - ./dockerfiles/mariadb:/docker-entrypoint-initdb.d/:ro
+
+  adminer:
+    image: adminer
+#   restart: always
+    ports:
+      - 8182:8080
+    networks:
+      - frontend
+      - backend
+    volumes:
+      - ./data:/data
+
+  fastapi:
+    build: './dockerfiles/fastapi'
+#    image: tiangolo/uvicorn-gunicorn-fastapi:latest
+    container_name: waterdata_fastapi_1cd 
+    restart: always
+    volumes: 
+      - ./app-api:/app/app
+     
+    environment:
+      - ENVIRONMENT=dev
+      - TESTING=0
+      - PYTHONPATH=/app
+    depends_on:
+      - mariadb
+#    command  
+    command: 'uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000'
+    ports:
+      - 8183:8000
+    networks:
+      - frontend
+      - backend  
+
+  jupytr:
+    image: jms
+    container_name: waterdata_jupytr
+    restart: always
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      - GRANT_SUDO=yes
+      - HOME=/home/admin
+      - WORKDIR=home/admin/dockers/waterdata_backend/
+    ports:
+      - 8889:8888
+    networks:
+      - frontend
+      - backend
+    volumes:
+      - /home/admin/dockers/waterdata_backend/frontend/jupytr:/home/jovyan/work
+
+
+networks:
+  backend:
+  frontend:
+
+volumes:
+  app:
+  app-api:
+  database:
+  data:
+  mariadb:
+  
+
+

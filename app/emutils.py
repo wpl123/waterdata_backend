@@ -58,8 +58,8 @@ def create_message(sender_email, receiver_email, subject, body, filename):
 
 
 def assemble_email(filename, subject):
-    sender_email = "pps.smtp@gmail.com"  # "Your name <Your email>"
-    receiver_email = "wplaird@bigpond.com"
+    sender_email = "removed"  # "Your name <Your email>"
+    receiver_email = "removed"
     body = 'Log file attached ' + filename
     text = create_message(sender_email, receiver_email, subject, body, filename)
     result = send_email(sender_email, receiver_email, text)

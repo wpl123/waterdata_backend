@@ -1,6 +1,8 @@
 .git.old/
 .vscode
 .history
+app/emutils_standalone.py
+app/file_write_test.py
 app/.vscode
 app/__pycache__
 app-api/__pycache__
@@ -10,7 +12,7 @@ database/
 venv/
 data/downloads
 data/uploads
-data/bulk_loads
+data/bulk_load
 data/waterdata
 data_csvs
 data/webscraping
@@ -28,7 +30,6 @@ pytorch_tut
 
 data/visualisations/elfin.csv
 data/visualisations/greengully.csv
-app/file_write_test.py
 frontend/app-dash/all_training_data.csv
 frontend/jupytr/visualisations/formatted_data/correct_54151_rainfall_data.csv
 frontend/jupytr/visualisations/formatted_data/fmt_2col_bore_data.csv

@@ -8,7 +8,7 @@ from email.mime.text import MIMEText
 
 def send_email(_sender_email, _receiver_email, _text):
     port = 465  # For SSL
-    password = '2U!3yYwwR'  # input("Type your password and press enter: ")
+    password = 'removed'  # input("Type your password and press enter: ")
     _result = False
     # Create a secure SSL context
     context = ssl.create_default_context()

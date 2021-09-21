@@ -79,7 +79,7 @@ def ftp_extract(ftp,meter_no,params,downloads_dir):
         data = getFile(ftp,fname)
         logging.info(inspect.stack()[0][3] + ' Data from file ' + downloads_dir + fname + ' extracted at ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')) 
         df_loaded = load_data(data, meter_no)
-        logging.info(inspect.stack()[0][3] + ' Data for meter ' + meter_no + ' loaded at ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')) 
+#        logging.info(inspect.stack()[0][3] + ' Data for meter ' + meter_no + ' loaded at ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')) 
 
     return df_loaded
 
@@ -99,4 +99,4 @@ def rainfall_scrape_and_write(meter_no, download_url, params, downloads_dir, log
     status = write_csv(fname, df_loaded)
    
    
-    logging.info(inspect.stack()[0][3] + ' FTP session ended ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+    logging.info(inspect.stack()[0][3] + ' FTP download ended for meter ' + meter_no + ' at ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))

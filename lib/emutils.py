@@ -6,13 +6,18 @@ from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
+import emconfig
+
 def send_email(_sender_email, _receiver_email, _text):
-    port = 465  # For SSL
-    password = 'removed'  # input("Type your password and press enter: ")
+    port = emconfig.port                
+    password = emconfig.password        
+    smtp_server = emconfig.smtp_server
+
     _result = False
+
     # Create a secure SSL context
     context = ssl.create_default_context()
-    with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
+    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
         server.login(_sender_email, password)
         _result = server.sendmail(_sender_email, _receiver_email, _text)
 
@@ -58,8 +63,8 @@ def create_message(sender_email, receiver_email, subject, body, filename):
 
 
 def assemble_email(filename, subject):
-    sender_email = "removed"  # "Your name <Your email>"
-    receiver_email = "removed"
+    sender_email = emconfig.sender_email
+    receiver_email = emconfig.receiver_email
     body = 'Log file attached ' + filename
     text = create_message(sender_email, receiver_email, subject, body, filename)
     result = send_email(sender_email, receiver_email, text)

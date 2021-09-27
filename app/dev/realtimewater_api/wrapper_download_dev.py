@@ -16,7 +16,7 @@ workingdir = "/home/admin/dockers/waterdata_backend/app/"
 
 from datetime import date
 from flutils import *
-
+import dbconfig
 
 #from surfacewater_download import *
 #from groundwater_2col_download import *
@@ -30,11 +30,11 @@ def get_meter_data():                       # read in all the test meters i.e. g
 
     connection = pymysql.connect(
 
-        host='192.168.11.6',
-        user='root', 
-        password='water',
-        database='waterdata',
-        port=30000)
+        host=dbconfig.host,
+        user=dbconfig.user, 
+        password=dbconfig.psw,
+        database=dbconfig.db_name,
+        port=dbconfig.port)
 
     try:
         with connection.cursor() as cursor:

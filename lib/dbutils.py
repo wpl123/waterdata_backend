@@ -4,12 +4,19 @@ import datetime
 import inspect
 
 from datetime import date
+
+import dbconfig
 from flutils import *
 
 class MySQLUtil():
 
-    def dbConnect(self, host, user, psw, db_name, port):
-        self.db = pymysql.connect(host=host, user=user, password=psw, db=db_name, charset='utf8', port=port)
+    def dbConnect(self): #,host,user,psw,db_name,charset,port
+        self.db = pymysql.connect(host=dbconfig.host, 
+            user=dbconfig.user, 
+            password=dbconfig.psw, 
+            db=dbconfig.db_name, charset='utf8', 
+            port=dbconfig.port)
+            
         logging.info(inspect.stack()[0][3] + ' Database opened ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
    
    
@@ -84,8 +91,8 @@ def checkDuplicates(mysql, sql):
 def check_start_end_dates(tablename, meter_no):
     
     mysql = MySQLUtil()
-    mysql.dbConnect(host ='192.168.11.6', user = 'root', psw = 'water', db_name = 'waterdata', port=30000)
-    
+#    mysql.dbConnect(host=dbconfig.host,user=dbconfig.user,password=dbconfig.psw,database=dbconfig.db_name,port=dbconfig.port)
+    mysql.dbConnect()
     sql = "SELECT `read_date` FROM `{0}` WHERE `meter_no` = '{1}' ORDER BY `read_date` DESC LIMIT 1".format(tablename, meter_no)
     qdate = mysql.execQuery(sql)  # returns a unique tuple
     sdate = qdate[0]

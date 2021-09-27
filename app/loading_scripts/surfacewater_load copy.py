@@ -6,6 +6,8 @@ import logging
 
 from datetime import date, timedelta
 
+import dbconfig
+
 
 def setup_logging(meter_no, logs_dir):
 
@@ -21,11 +23,11 @@ def normalize_sw_Date(d):
 def run_sql_select_1_row(sql1):
     
     connection = pymysql.connect(
-        host='192.168.11.6',
-        user='root', 
-        password='water',
-        database='waterdata',
-        port=30000)
+        host=dbconfig.host,
+        user=dbconfig.user, 
+        password=dbconfig.psw,
+        database=dbconfig.db_name,
+        port=dbconfig.port)
 
     last_id = 0
        

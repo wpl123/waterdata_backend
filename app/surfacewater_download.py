@@ -33,12 +33,12 @@ chrome_options.add_experimental_option("prefs", {
         "safebrowsing.enabled": False
 })
 
+SELENIUM_TIMEOUT = 60
 
-
-meter_no = ""
-download_url = ""
-downloads_dir = ""
-logs_dir = ""
+#meter_no = ""
+#download_url = ""
+#downloads_dir = ""
+#logs_dir = ""
 
 def surfacewater_scrape_and_write(meter_no, download_url, downloads_dir, logs_dir):
 
@@ -60,22 +60,22 @@ def surfacewater_scrape_and_write(meter_no, download_url, downloads_dir, logs_di
     driver.save_screenshot(screenshots_dir + meter_no + '_' + 'image0.png')
     # print("Page title was '{}'".format(driver.title))
 
-    WebDriverWait(driver, 20).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH,"//iframe[@id='webhyd']")))
+    WebDriverWait(driver, SELENIUM_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH,"//iframe[@id='webhyd']")))
 
-    WebDriverWait(driver, 20).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH,"//iframe[@id='rsrscf_org']")))
+    WebDriverWait(driver, SELENIUM_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH,"//iframe[@id='rsrscf_org']")))
 
 
-    sf_swl = WebDriverWait(driver,20).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='selorder__100.00_100.00__1']")))
+    sf_swl = WebDriverWait(driver,SELENIUM_TIMEOUT).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='selorder__100.00_100.00__1']")))
     # should be checked already
 
     
-    sf_dr = WebDriverWait(driver,20).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='selorder__100.00_141.00__1']")))   
+    sf_dr = WebDriverWait(driver,SELENIUM_TIMEOUT).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='selorder__100.00_141.00__1']")))   
     sf_dr.click()
     
     driver.save_screenshot(screenshots_dir + meter_no + '_' + 'image1.png') 
 
     try:
-        element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "rs_period")))
+        element = WebDriverWait(driver, SELENIUM_TIMEOUT).until(EC.presence_of_element_located((By.ID, "rs_period")))
     finally:
         s1 = Select(driver.find_element_by_id('rs_period'))
         s1.select_by_visible_text('Custom')
@@ -83,7 +83,7 @@ def surfacewater_scrape_and_write(meter_no, download_url, downloads_dir, logs_di
     driver.save_screenshot(screenshots_dir + meter_no + '_' + 'image2.png')
 
     try:
-        element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "output")))
+        element = WebDriverWait(driver, SELENIUM_TIMEOUT).until(EC.presence_of_element_located((By.ID, "output")))
     finally:
         s2 = Select(driver.find_element_by_id('output'))
         s2.select_by_visible_text('Table')
@@ -91,7 +91,7 @@ def surfacewater_scrape_and_write(meter_no, download_url, downloads_dir, logs_di
     driver.save_screenshot(screenshots_dir + meter_no + '_' + 'image3.png')
     
     try:
-        element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "interval")))
+        element = WebDriverWait(driver, SELENIUM_TIMEOUT).until(EC.presence_of_element_located((By.ID, "interval")))
     finally:
         s3 = Select(driver.find_element_by_id('interval'))
         s3.select_by_visible_text('Daily')
@@ -101,14 +101,14 @@ def surfacewater_scrape_and_write(meter_no, download_url, downloads_dir, logs_di
     time.sleep(2)
 
     try:
-        element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "cdate1")))
+        element = WebDriverWait(driver, SELENIUM_TIMEOUT).until(EC.presence_of_element_located((By.ID, "cdate1")))
     finally:
         sf_sdate = driver.find_element(By.ID, 'cdate1')
         sf_sdate.clear()
         sf_sdate.send_keys(sdate)
     
     try:
-        element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "cdate2")))
+        element = WebDriverWait(driver, SELENIUM_TIMEOUT).until(EC.presence_of_element_located((By.ID, "cdate2")))
     finally:
         sf_edate = driver.find_element(By.ID, 'cdate2')
         sf_edate.clear()
@@ -117,14 +117,14 @@ def surfacewater_scrape_and_write(meter_no, download_url, downloads_dir, logs_di
     driver.save_screenshot(screenshots_dir + meter_no + '_' + 'image5.png')
 
     try:
-        element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//button[@id='submit']")))
+        element = WebDriverWait(driver, SELENIUM_TIMEOUT).until(EC.presence_of_element_located((By.XPATH, "//button[@id='submit']")))
     finally:
         get_output_button = driver.find_element_by_xpath("//button[@id='submit']")
         get_output_button.click()
 
     driver.save_screenshot(screenshots_dir + meter_no + '_' + 'image6.png')
 
-    WebDriverWait(driver, 60).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH,"//body/div[4]/div[1]/div[1]/div[1]/div[1]/iframe[1]")))
+    WebDriverWait(driver, SELENIUM_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH,"//body/div[4]/div[1]/div[1]/div[1]/div[1]/iframe[1]")))
 
     # //body/div[4]/div[1]/div[1]/div[1]/div[1]/iframe[1]
 

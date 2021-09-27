@@ -34,13 +34,13 @@ chrome_options.add_experimental_option("prefs", {
         "safebrowsing.enabled": False
 })
 
+SELENIUM_TIMEOUT = 60
 
-
-meter_no = ""
-download_url = ""
-last_download = datetime.datetime.now()
-downloads_dir = ""
-logs_dir = ""
+#meter_no = ""
+#download_url = ""
+#last_download = datetime.datetime.now()
+#downloads_dir = ""
+#logs_dir = ""
 
 def groundwater_2col_scrape_and_write(meter_no, download_url, downloads_dir, logs_dir):
 
@@ -62,22 +62,22 @@ def groundwater_2col_scrape_and_write(meter_no, download_url, downloads_dir, log
     driver.save_screenshot(screenshots_dir + meter_no + '_' + 'image0.png')
     # print("Page title was '{}'".format(driver.title))
 
-    WebDriverWait(driver, 20).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH,"//iframe[@id='webhyd']")))
+    WebDriverWait(driver, SELENIUM_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH,"//iframe[@id='webhyd']")))
 
-    WebDriverWait(driver, 20).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH,"//iframe[@id='gwgwcf_org']")))
+    WebDriverWait(driver, SELENIUM_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH,"//iframe[@id='gwgwcf_org']")))
 
 
-    bl_bmp = WebDriverWait(driver,20).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='selorder__110.00_110.00__1']")))
+    bl_bmp = WebDriverWait(driver,SELENIUM_TIMEOUT).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='selorder__110.00_110.00__1']")))
     # should be checked already
 
     # time.sleep(1)
-    bl_ahd = WebDriverWait(driver,20).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='selorder__110.00_115.00__1']")))   
+    bl_ahd = WebDriverWait(driver,SELENIUM_TIMEOUT).until(EC.element_to_be_clickable((By.XPATH,"//input[@id='selorder__110.00_115.00__1']")))   
     bl_ahd.click()
     
     driver.save_screenshot(screenshots_dir + meter_no + '_' + 'image1.png') 
 
     try:
-        element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "gw_period")))
+        element = WebDriverWait(driver, SELENIUM_TIMEOUT).until(EC.presence_of_element_located((By.ID, "gw_period")))
     finally:
         s1 = Select(driver.find_element_by_id('gw_period'))
         s1.select_by_visible_text('Custom')
@@ -85,7 +85,7 @@ def groundwater_2col_scrape_and_write(meter_no, download_url, downloads_dir, log
     driver.save_screenshot(screenshots_dir + meter_no + '_' + 'image2.png')
 
     try:
-        element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "output")))
+        element = WebDriverWait(driver, SELENIUM_TIMEOUT).until(EC.presence_of_element_located((By.ID, "output")))
     finally:
         s2 = Select(driver.find_element_by_id('output'))
         s2.select_by_visible_text('Table')
@@ -93,7 +93,7 @@ def groundwater_2col_scrape_and_write(meter_no, download_url, downloads_dir, log
     driver.save_screenshot(screenshots_dir + meter_no + '_' + 'image3.png')
     
     try:
-        element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "interval")))
+        element = WebDriverWait(driver, SELENIUM_TIMEOUT).until(EC.presence_of_element_located((By.ID, "interval")))
     finally:
         s3 = Select(driver.find_element_by_id('interval'))
         s3.select_by_visible_text('Daily')
@@ -103,14 +103,14 @@ def groundwater_2col_scrape_and_write(meter_no, download_url, downloads_dir, log
     time.sleep(2)
 
     try:
-        element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "cdate1")))
+        element = WebDriverWait(driver, SELENIUM_TIMEOUT).until(EC.presence_of_element_located((By.ID, "cdate1")))
     finally:
         bl_sdate = driver.find_element(By.ID, 'cdate1')
         bl_sdate.clear()
         bl_sdate.send_keys(sdate)
     
     try:
-        element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "cdate2")))
+        element = WebDriverWait(driver, SELENIUM_TIMEOUT).until(EC.presence_of_element_located((By.ID, "cdate2")))
     finally:
         bl_edate = driver.find_element(By.ID, 'cdate2')
         bl_edate.clear()
@@ -119,14 +119,14 @@ def groundwater_2col_scrape_and_write(meter_no, download_url, downloads_dir, log
     driver.save_screenshot(screenshots_dir + meter_no + '_' + 'image5.png')
 
     try:
-        element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//button[@id='submit']")))
+        element = WebDriverWait(driver, SELENIUM_TIMEOUT).until(EC.presence_of_element_located((By.XPATH, "//button[@id='submit']")))
     finally:
         get_output_button = driver.find_element_by_xpath("//button[@id='submit']")
         get_output_button.click()
 
     driver.save_screenshot(screenshots_dir + meter_no + '_' + 'image6.png')
 
-    WebDriverWait(driver, 60).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH,"//body/div[4]/div[1]/div[1]/div[1]/div[1]/iframe[1]")))
+    WebDriverWait(driver, SELENIUM_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH,"//body/div[4]/div[1]/div[1]/div[1]/div[1]/iframe[1]")))
 
     #TODO: error handling - if it fails allow to go to next meter_no
     table = driver.find_element(By.XPATH, "//body/div[@id='wrapper']/div[2]/div[2]/table[1]")  #wpl 27.8.2021 mod for new chrome version

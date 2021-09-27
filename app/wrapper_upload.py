@@ -2,14 +2,15 @@
 
 import csv
 import datetime
-import glob
-import os
-import sys
+import glob, os, sys
 import time
 
 import numpy as np
 import pandas as pd
 import pymysql
+
+#https://stackoverflow.com/questions/1260792/import-a-file-from-a-subdirectory#%E2%80%A6
+sys.path.extend([f'./{name}' for name in os.listdir(".") if os.path.isdir(name)])
 
 # print(sys.path)
 workingdir = "/home/admin/dockers/waterdata_backend/app/"
@@ -17,6 +18,9 @@ workingdir = "/home/admin/dockers/waterdata_backend/app/"
 # print(sys.path)
 
 from datetime import date
+
+import dbconfig
+
 from flutils import *
 from emutils import *
 
@@ -31,12 +35,11 @@ from surfacewater_upload import *
 def get_meter_data():
 
     connection = pymysql.connect(
-
-        host='192.168.11.6',
-        user='root', 
-        password='water',
-        database='waterdata',
-        port=30000)
+        host=dbconfig.host,
+        user=dbconfig.user, 
+        password=dbconfig.psw,
+        database=dbconfig.db_name,
+        port=dbconfig.port)
 
     try:
         with connection.cursor() as cursor:

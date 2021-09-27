@@ -11,18 +11,11 @@ import datetime
 import csv
 
 
-
 def mysqlconnect(): 
     # To connect MySQL database 
 
   
-    connection = pymysql.connect(
-        # host='192.168.208.1',
-        host='192.168.11.6',
-        user='root', 
-        password='water',
-        database='waterdata',
-        port=30000)
+    connection = pymysql.connect()
     
     
     try:

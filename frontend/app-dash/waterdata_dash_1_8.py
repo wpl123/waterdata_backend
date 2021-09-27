@@ -69,7 +69,7 @@ dfk.columns = ['meter_no','read_date_idx','read_date','level']
 dfk['read_date_idx'] = pd.to_datetime(dfk['read_date_idx'])
 dfk.set_index('read_date_idx',inplace=True,drop=True)
 
-# Get 10 day moving average of rainfall
+# Get 90 day moving average of rainfall
 dfk['MA90'] = (dfk['level'].rolling(window=90).mean())
 
 #df_ma90 = (dfk['level'].rolling(window=90).mean())
@@ -401,12 +401,21 @@ def update_graph(meter_no1, meter_no2, startdate, enddate):
         
         df_join3 = df_join3.dropna() #(axis=0, how='any', thresh=None, subset=None, inplace=False)
         
-        df_join3 = df_join3.apply(pd.to_numeric)
-        df_join3 = df_join3.drop(columns=['MA90'])
-        df_corr = df_join3.corr(method='spearman')
-
+#        df_join3[m1] = pd.to_numeric(df_join3[m1])
+#        df_join3[m2] = pd.to_numeric(df_join3[m2])
+#        df_join3['Elfin Crossing'] = pd.to_numeric(df_join3['Elfin Crossing'])
+#        df_join3['Kaputar Rainfall'] = pd.to_numeric(df_join3['Kaputar Rainfall'])
         
-       
+        df_join3 = df_join3.apply(pd.to_numeric)
+        
+#        print(df_join3)
+        df_join3 = df_join3.drop(columns=['MA90'])
+        df_join3 = df_join3.replace('NaN', 0)
+        df_corr = df_join3.corr(method='spearman')
+        df_corr = df_corr.replace('NaN', 0)        
+        
+#        print(df_corr)
+
 #        input("After correlation. Press any key to continue")
 
 #    input("Before make plots. Press any key to continue")

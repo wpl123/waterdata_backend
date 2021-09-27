@@ -19,7 +19,7 @@ def setupLogging(meter_no, logs_dir):
 
 
 def moveFile(fnm, dnm):  
-    logging.info(inspect.stack()[0][3] + ' Moving Filename {0} to directory name {1} at {2}'.format(fnm,dnm,datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')))
+    logging.info(inspect.stack()[0][3] + ' About to move {0} to directory name {1} at {2}'.format(fnm,dnm,datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')))
     dir_writeable = check_dir_writable(dnm)
     result = False
 

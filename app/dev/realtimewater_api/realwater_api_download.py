@@ -176,7 +176,7 @@ def load_api_and_write(meter_no, meter_type, meter_elev, params, logs_dir, downl
     setupLogging(meter_no, logs_dir)
 
     mysql = MySQLUtil()
-    mysql.dbConnect(host ='192.168.11.6', user = 'root', psw = 'water', db_name = 'waterdata', port=30000)
+    mysql.dbConnect()
 
     result = get_api_webdata(mysql, meter_no, meter_type, meter_elev, logs_dir, download_dir)
     logging.info(inspect.stack()[0][3] + ' API Download ended ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))

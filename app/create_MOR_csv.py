@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 import csv
 
+import dbconfig
 
 
 #def mysqlconnect(): 
@@ -12,12 +13,11 @@ import csv
 
   
 connection = pymysql.connect(
-    # host='192.168.208.1',
-    host='192.168.11.6',
-    user='root', 
-    password='water',
-    database='waterdata',
-    port=30000)
+    host=dbconfig.host,
+    user=dbconfig.user, 
+    password=dbconfig.psw,
+    database=dbconfig.db_name,
+    port=dbconfig.port)
 
 
 try:

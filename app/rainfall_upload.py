@@ -8,6 +8,7 @@ import re
 
 from datetime import date, timedelta
 from dateutil.parser import parse
+
 from dbutils import *
 from flutils import *
 
@@ -143,7 +144,7 @@ def rainfallLoad(meter_no, downloads_dir, uploads_dir, logs_dir):
     setupLogging(meter_no, logs_dir)
     
     mysql = MySQLUtil()
-    mysql.dbConnect(host ='192.168.11.6', user = 'root', psw = 'water', db_name = 'waterdata', port=30000)
+    mysql.dbConnect()
     
     formatted_csvfile = rainfallFormat(mysql, meter_no, downloads_dir, uploads_dir)
     

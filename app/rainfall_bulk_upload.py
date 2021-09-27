@@ -16,6 +16,7 @@ import re
 
 from datetime import date, timedelta
 from dateutil.parser import parse
+
 from dbutils import *
 from flutils import *
 
@@ -82,7 +83,7 @@ def main():
     setupLogging(meter_no, logs_dir)
     
     mysql = MySQLUtil()
-    mysql.dbConnect(host ='192.168.11.6', user = 'root', psw = 'water', db_name = 'waterdata', port=30000)
+    mysql.dbConnect()
 
     result = rainfall_bulk_load(mysql,meter_no,csvfile) 
     

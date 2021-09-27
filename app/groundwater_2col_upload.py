@@ -6,6 +6,9 @@ import logging
 import inspect
 
 from datetime import date, timedelta
+
+import dbconfig
+
 from dbutils import *
 from flutils import *
 
@@ -121,7 +124,7 @@ def groundwater2colLoad(meter_no, downloads_dir, uploads_dir, logs_dir):
     setupLogging(meter_no, logs_dir)
     
     mysql = MySQLUtil()
-    mysql.dbConnect(host ='192.168.11.6', user = 'root', psw = 'water', db_name = 'waterdata', port=30000)
+    mysql.dbConnect()
     
     formatted_csvfile = groundwaterFormat(mysql, meter_no, downloads_dir, uploads_dir)
     

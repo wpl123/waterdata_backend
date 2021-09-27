@@ -33,13 +33,13 @@ chrome_options.add_experimental_option("prefs", {
         "safebrowsing.enabled": False
 })
 
+SELENIUM_TIMEOUT = 60
 
-
-meter_no = ""
-download_url = ""
-last_download = datetime.datetime.now()
-downloads_dir = ""
-logs_dir = ""
+#meter_no = ""
+#download_url = ""
+#last_download = datetime.datetime.now()
+#downloads_dir = ""
+#logs_dir = ""
 
 def rainfall_scrape_and_write(meter_no, download_url, last_download, downloads_dir, logs_dir):
 
@@ -70,7 +70,7 @@ def rainfall_scrape_and_write(meter_no, download_url, last_download, downloads_d
 
 
     #ready = WebDriverWait(driver,20).until(EC.presence_of_element_located((By.XPATH,"//table[@id='dataTable']"))) 
-    ready = WebDriverWait(driver,20).until(EC.presence_of_element_located((By.XPATH,"//*[@id='dataTable']"))) 
+    ready = WebDriverWait(driver,SELENIUM_TIMEOUT).until(EC.presence_of_element_located((By.XPATH,"//*[@id='dataTable']"))) 
     driver.save_screenshot(screenshots_dir + meter_no + '_' + 'image1.png')
 
     dropdown = driver.find_element(By.ID, 'p_startYear')

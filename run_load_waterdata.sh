@@ -11,6 +11,7 @@ UPLOADDIR=/home/admin/dockers/waterdata_backend/data/uploads/cronlog
 
 # /home/admin/dockers/waterdata_backend/venv/bin/python -m smtpd -c DebuggingServer -n localhost:1025 && \
 
+cd /home/admin/dockers/waterdata_backend
 /home/admin/dockers/waterdata_backend/venv/bin/python -m smtpd -c DebuggingServer -n localhost:1025 >> /home/admin/dockers/waterdata_backend/data/downloads/cronlog/cron.log 2>&1 &
 PID=$!
 

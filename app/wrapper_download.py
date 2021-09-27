@@ -3,11 +3,13 @@
 import pymysql
 import pandas as pd
 import numpy as np
-import glob, os
+import glob, sys, os
 import time
 import datetime
 import csv
-import sys
+
+#https://stackoverflow.com/questions/1260792/import-a-file-from-a-subdirectory#%E2%80%A6
+sys.path.extend([f'./{name}' for name in os.listdir(".") if os.path.isdir(name)])
 
 # print(sys.path)
 workingdir = "/home/admin/dockers/waterdata_backend/app/"
@@ -15,8 +17,10 @@ workingdir = "/home/admin/dockers/waterdata_backend/app/"
 # print(sys.path)
 
 from datetime import date
+
 from flutils import *
 from emutils import *
+import dbconfig
 
 
 from surfacewater_download import *
@@ -29,13 +33,12 @@ from rainfall_ftp_download import *
 
 def get_meter_data():                       # read in all the active meters
 
-    connection = pymysql.connect(
-
-        host='192.168.11.6',
-        user='root', 
-        password='water',
-        database='waterdata',
-        port=30000)
+    connection = pymysql.connect(host=dbconfig.host, 
+        user=dbconfig.user, 
+        password=dbconfig.psw, 
+        db=dbconfig.db_name, 
+        charset='utf8', 
+        port=dbconfig.port)
 
     try:
         with connection.cursor() as cursor:
@@ -57,12 +60,31 @@ def get_meter_data():                       # read in all the active meters
     return(df)
 
 
+def check_loaded(_meter_no, _download_dir, _last_download):
+    _result = False
+    _today = datetime.datetime.today()
+    _ldate = (_today).strftime('%Y%m%d')
+    _ddate = (_last_download).strftime('%Y%m%d')
+    _csvfile = _download_dir + _meter_no + '_' + _ldate + '.csv'
+    
+    if _ddate == _ldate:                        # check if download failed
+        _result = True
+    elif os.path.exists(_csvfile) == True:     # check if upload failed
+        _result = True
+    else:
+        _result = False
+        
+    return _result    
+ 
+
 
 def scrape_webdata(df):
 
     download_dir = "/home/admin/dockers/waterdata_backend/data/downloads/"
     logs_dir = "/home/admin/dockers/waterdata_backend/data/downloads/logs/"
     logfile = logs_dir + str(datetime.datetime.now().strftime('%Y%m%d%H%M%S')) + ".log"
+    fp = open(logfile, 'x')
+    fp.close()
     
     check_file_writable(download_dir)
     check_file_writable(logs_dir)
@@ -70,7 +92,11 @@ def scrape_webdata(df):
 
     for i in range(len(df)): #TODO: build loop for more than 1000 days
     
-        # print(i, df.iloc[i, 3])   # i.e. meter_type
+        
+        #check if file already exists for today
+        if check_loaded(df.iloc[i,1], download_dir, df.iloc[i,12]) == True:
+            continue
+        
 
         if df.iloc[i, 3] == 0:             # test
             pass  # print("test_format(df.iloc[i,10], df.iloc[i,11]), workingdir")        

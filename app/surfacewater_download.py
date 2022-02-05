@@ -34,6 +34,7 @@ chrome_options.add_experimental_option("prefs", {
 })
 
 SELENIUM_TIMEOUT = 60
+LONG_SELENIUM_TIMEOUT = 120
 
 #meter_no = ""
 #download_url = ""
@@ -124,7 +125,7 @@ def surfacewater_scrape_and_write(meter_no, download_url, downloads_dir, logs_di
 
     driver.save_screenshot(screenshots_dir + meter_no + '_' + 'image6.png')
 
-    WebDriverWait(driver, SELENIUM_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH,"//body/div[4]/div[1]/div[1]/div[1]/div[1]/iframe[1]")))
+    WebDriverWait(driver, LONG_SELENIUM_TIMEOUT).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH,"//body/div[4]/div[1]/div[1]/div[1]/div[1]/iframe[1]")))
 
     # //body/div[4]/div[1]/div[1]/div[1]/div[1]/iframe[1]
 

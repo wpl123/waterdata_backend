@@ -4,7 +4,8 @@
 #	https://jupyter-docker-stacks.readthedocs.io/en/latest/index.html
 
 #WORKDIR=$PWD/work
-WORKDIR=$HOME/dockers/waterdata_backend/data
+#WORKDIR=$HOME/dockers/waterdata_backend/data
+WORKDIR=$HOME/dockers/waterdata_backend/frontend/jupytr/visualisations/
 docker run --user root --rm -p 8889:8888 -e JUPYTER_ENABLE_LAB=yes -e GRANT_SUDO=yes -v $WORKDIR:/home/jovyan/work jms
 
 #jupyter/datascience-notebook:

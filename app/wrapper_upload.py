@@ -28,8 +28,7 @@ from groundwater_2col_upload import *
 from groundwater_3col_upload import *
 from rainfall_ftp_upload import *
 from surfacewater_upload import *
-
-
+   
 
 
 def get_meter_data():
@@ -40,15 +39,17 @@ def get_meter_data():
         password=dbconfig.psw,
         database=dbconfig.db_name,
         port=dbconfig.port)
-
+    
+     
     try:
-        with connection.cursor() as cursor:
+        with connection.cursor() as cursor: # order by meter_type to make sure rainfall loads first
 
             sql = ('''  SELECT *  
                         FROM   
                             `meters`   
                         WHERE  
                             `get_data` = 1
+                        ORDER BY `meter_type` DESC     
                         ''')
 
         df = pd.read_sql_query(sql, connection, parse_dates=['read_date','%Y-%m-%d'], coerce_float=True)
@@ -60,6 +61,21 @@ def get_meter_data():
 #    print(df.dtypes)
     return(df)
 
+
+def check_loaded(_meter_no, _uploads_dir, _last_download):
+    _result = False
+    _today = datetime.datetime.today()
+    _ldate = (_today).strftime('%Y%m%d')
+    _ddate = (_last_download).strftime('%Y%m%d')
+    _csvfile = _uploads_dir + _meter_no + '_' + _ldate + '.csv'
+#    _csvfile = _uploads_dir + _meter_no + '*' + '.csv'
+    
+    if os.path.exists(_csvfile) == True:     # check if upload file exists
+        _result = True
+    else:
+        _result = False
+        
+    return _result  
 
 
 
@@ -75,7 +91,12 @@ def load_webdata(df):
 
     for i in range(len(df)):
     
-        # print(i, df.iloc[i, 1])
+        print('Processing upload for meter ' + df.iloc[i,1])
+#        #check if file for this meter has already been uploaded and moved for today
+#        if check_loaded(df.iloc[i,1], uploads_dir, df.iloc[i,12]) == False:
+#            print("Error: " + df.iloc[i,1] + " for " + str(df.iloc[i,12]) + " has already been loaded and moved to " + uploads_dir)
+#            continue
+        
 
         if df.iloc[i, 3] == 0:             # test
             pass # print("test_format(df.iloc[i,10], df.iloc[i,11]), workingdir")       
@@ -98,10 +119,11 @@ def main():
     meter_df = get_meter_data()
     log = load_webdata(meter_df)
     
-    if check_logfile(log) == True:
-        assemble_email(log, 'ERROR: Waterdata database load errors found')
-    # else:
-    #     assemble_email(log, 'SUCCESS: Waterdata database load successful')
+    if os.path.exists(log) == True:
+        if check_logfile(log) == True:
+            assemble_email(log, 'ERROR: Waterdata database load errors found')
+        # else:
+        #     assemble_email(log, 'SUCCESS: Waterdata database load successful')
 
 if __name__ == "__main__":
     main()

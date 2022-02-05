@@ -30,7 +30,6 @@ from rainfall_ftp_download import *
 # from app.downloading_scripts.sw_download import *
 
 
-
 def get_meter_data():                       # read in all the active meters
 
     connection = pymysql.connect(host=dbconfig.host, 
@@ -41,19 +40,21 @@ def get_meter_data():                       # read in all the active meters
         port=dbconfig.port)
 
     try:
-        with connection.cursor() as cursor:
+        with connection.cursor() as cursor:  # order by meter_type to make sure rainfall loads first
+
 
             sql = ('''  SELECT *  
                         FROM   
                             `meters`   
                         WHERE  
                             `get_data` = 1
+                        ORDER BY `meter_type` DESC    
                         ''')
 
         df = pd.read_sql_query(sql, connection, parse_dates=['read_date','%Y-%m-%d'], coerce_float=True)
 
     except:
-        print("Error: unable to convert the data")
+        print("Error: unable to get meter data")
 
     connection.close()
     
@@ -92,7 +93,7 @@ def scrape_webdata(df):
 
     for i in range(len(df)): #TODO: build loop for more than 1000 days
     
-        
+        print('Processing download for meter ' + df.iloc[i,1] + ' at ' + df.iloc[i,10] )
         #check if file already exists for today
         if check_loaded(df.iloc[i,1], download_dir, df.iloc[i,12]) == True:
             continue

@@ -1,0 +1,576 @@
+INFO:root:--------------------------------------------------------------------------------
+INFO:root:setupLogging Logging started for 054021-1 at 13/04/2022 08:58:45
+INFO:root:dbConnect Database opened 13/04/2022 08:58:45
+INFO:root: Data load started 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-1-1', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-01-01' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-1-1 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-1-2', 3.2, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-01-02' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-1-2 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-1-3', 0.2, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-01-03' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-1-3 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-1-4', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-01-04' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-1-4 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-1-5', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-01-05' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-1-5 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-1-6', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-01-06' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-1-6 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-1-7', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-01-07' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-1-7 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-1-8', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-01-08' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-1-8 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-1-9', 10.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-01-09' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-1-9 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-1-10', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-01-10' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-1-10 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-1-11', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-01-11' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-1-11 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-1-12', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-01-12' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-1-12 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-1-13', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-01-13' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-1-13 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-1-14', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-01-14' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-1-14 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-1-15', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-01-15' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-1-15 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-1-16', 0.2, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-01-16' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-1-16 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-1-17', 0.2, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-01-17' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-1-17 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-1-18', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-01-18' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-1-18 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-1-19', 26.4, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-01-19' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-1-19 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-1-20', 1.8, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-01-20' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-1-20 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-1-21', 0.2, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-01-21' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-1-21 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-1-22', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-01-22' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-1-22 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-1-23', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-01-23' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-1-23 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-1-24', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-01-24' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-1-24 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-1-25', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-01-25' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-1-25 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-1-26', 23.4, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-01-26' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-1-26 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-1-27', 5.8, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-01-27' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-1-27 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-1-28', 1.4, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-01-28' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-1-28 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-1-29', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-01-29' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-1-29 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-1-30', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-01-30' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-1-30 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-1-31', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-01-31' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-1-31 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-2-1', 1.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-02-01' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-2-1 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-2-2', 8.8, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-02-02' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-2-2 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-2-3', 14.8, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-02-03' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-2-3 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-2-4', 0.2, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-02-04' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-2-4 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-2-5', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-02-05' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-2-5 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-2-6', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-02-06' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-2-6 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-2-7', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-02-07' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-2-7 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-2-8', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-02-08' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-2-8 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-2-9', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-02-09' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-2-9 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-2-10', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-02-10' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-2-10 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-2-11', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-02-11' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-2-11 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-2-12', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-02-12' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-2-12 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-2-13', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-02-13' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-2-13 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-2-14', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-02-14' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-2-14 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-2-15', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-02-15' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-2-15 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-2-16', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:45(1062, "Duplicate entry '054021-1-2022-02-16' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-2-16 13/04/2022 08:58:45
+INFO:root:execSQL execSQL 13/04/2022 08:58:45
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-2-17', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46(1062, "Duplicate entry '054021-1-2022-02-17' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-2-17 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-2-18', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46(1062, "Duplicate entry '054021-1-2022-02-18' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-2-18 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-2-19', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46(1062, "Duplicate entry '054021-1-2022-02-19' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-2-19 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-2-20', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46(1062, "Duplicate entry '054021-1-2022-02-20' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-2-20 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-2-21', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46(1062, "Duplicate entry '054021-1-2022-02-21' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-2-21 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-2-22', 8.8, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46(1062, "Duplicate entry '054021-1-2022-02-22' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-2-22 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-2-23', 9.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46(1062, "Duplicate entry '054021-1-2022-02-23' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-2-23 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-2-24', 11.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46(1062, "Duplicate entry '054021-1-2022-02-24' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-2-24 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-2-25', 35.8, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46(1062, "Duplicate entry '054021-1-2022-02-25' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-2-25 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-2-26', 0.8, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46(1062, "Duplicate entry '054021-1-2022-02-26' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-2-26 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-2-27', 0.2, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46(1062, "Duplicate entry '054021-1-2022-02-27' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-2-27 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-2-28', 0.2, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46(1062, "Duplicate entry '054021-1-2022-02-28' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-2-28 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58114, '054021-1', '2022-3-1', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46(1062, "Duplicate entry '054021-1-2022-03-01' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-3-1 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58146, '054021-1', '2022-4-3', 0.0, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46(1062, "Duplicate entry '054021-1-2022-04-03' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-4-3 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58146, '054021-1', '2022-4-4', 8.8, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46(1062, "Duplicate entry '054021-1-2022-04-04' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-4-4 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58146, '054021-1', '2022-4-5', 5.6, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46(1062, "Duplicate entry '054021-1-2022-04-05' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-4-5 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58148, '054021-1', '2022-4-8', 1.6, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46(1062, "Duplicate entry '054021-1-2022-04-08' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-4-8 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58148, '054021-1', '2022-4-9', 10.8, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46(1062, "Duplicate entry '054021-1-2022-04-09' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-4-9 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58148, '054021-1', '2022-4-10', 5.6, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46(1062, "Duplicate entry '054021-1-2022-04-10' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-4-10 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46 INSERT 
+                        INTO `rainfall` (`id`, `meter_no`, `read_date`, 
+                                `rf_read1`, `dy_read1`, `ql_read1`, `comments`, `creation_date`)
+                        VALUES (58148, '054021-1', '2022-4-11', 0.2, 1, 'N', 'Bulk Load', '2022-04-13 08:58:45')
+                        
+ERROR:root:execSQL execSQL failed 13/04/2022 08:58:46(1062, "Duplicate entry '054021-1-2022-04-11' for key 'rainfall_idx'")
+ERROR:root: Insert failed meter_no:054021-1 date:2022-4-11 13/04/2022 08:58:46
+INFO:root:execSQL execSQL 13/04/2022 08:58:46
+INFO:root:moveFile About to move /home/admin/dockers/waterdata_backend/data/bulk_upload//home/admin/dockers/waterdata_backend/data/bulk_upload/IDCJAC0009_054021_2022_Data.csv to directory name /home/admin/dockers/waterdata_backend/data/bulk_upload/bulk_upload_hist at 13/04/2022 08:58:46

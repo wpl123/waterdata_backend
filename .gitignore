@@ -32,3 +32,6 @@ frontend/jupytr/visualisations/unformatted_data/
 workspace.code-workspace
 venv/
 vendor
+frontend/jupytr/visualisations/elfin.csv
+frontend/jupytr/visualisations/greengully.csv
+frontend/jupytr/ScrapeTest/twitter_scrape_test.ipynb

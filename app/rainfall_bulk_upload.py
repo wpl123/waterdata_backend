@@ -1,18 +1,38 @@
-#BOM std rain gauge csv file
+# INSTRUCTIONS
+#
+# Download the csv file from;
+#   1. http://www.bom.gov.au/jsp/ncc/cdio/weatherData/av?p_nccObsCode=136&p_display_type=dailyDataFile&p_startYear=&p_c=&p_stn_num=054151
+#   2. http://www.bom.gov.au/jsp/ncc/cdio/weatherData/av?p_nccObsCode=136&p_display_type=dailyDataFile&p_startYear=&p_c=&p_stn_num=054021
+# Move csv files to data/bulk_load directory
+# Edit the lines in main to contain the right csv file and correct meter
+# e.g.
+#   meter_no = "054151-2"                           #  "054021-1" 
+#   csvfile = download_dir + "IDCJAC0009_054151_2022_Data.csv"   
+#
+# Run this bulk loader script
+# move the csv file to bulk_load_hist directory
+#
+# check rainfall table using adminer
+
+
+# BOM std rain gauge csv file
 
 # Product code	Bureau of Meteorology station number	Year	Month	Day	Rainfall amount (millimetres)	Period over which rainfall was measured (days)	Quality
 
 #1. import
-#2. read in csv to dr
+#2. read in csv to df
 # load df into database
 
 import pymysql
 import pandas as pd
 import numpy as np
-import os, glob, inspect
+import sys, os, glob, inspect
 import datetime, csv
 import logging
 import re
+
+#https://stackoverflow.com/questions/1260792/import-a-file-from-a-subdirectory#%E2%80%A6
+sys.path.extend([f'./{name}' for name in os.listdir(".") if os.path.isdir(name)])
 
 from datetime import date, timedelta
 from dateutil.parser import parse
@@ -77,8 +97,8 @@ def main():
     download_dir = "/home/admin/dockers/waterdata_backend/data/bulk_upload/"
     logs_dir = "/home/admin/dockers/waterdata_backend/data/bulk_upload/logs/"
 
-    meter_no = "054021-1"                           #  "54151-2" 
-    csvfile = download_dir + "IDCJAC0009_054021_2021_Data.csv"     # IDCJAC0009_054021_2021_Data.csv IDCJAC0009_054151_2021_Data.csv
+    meter_no = "054151-2"                           #  "54151-2" 
+    csvfile = download_dir + "IDCJAC0009_054151_2022_Data.csv"     # IDCJAC0009_054021_2021_Data.csv IDCJAC0009_054151_2021_Data.csv
 
     setupLogging(meter_no, logs_dir)
     

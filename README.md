@@ -1,9 +1,9 @@
 # waterdata_backend
 
 
-Extract, transform and load pipeline of catchment rainfall, surface/ground water data from Water NSW and Australian Bureau of Meteorology. 
+This project is designed to build a ETL pipeline of rainfall, surface/ground water data from Australian water and meteorology agencies. 
 
-Looking for groundwater anomalies using Jupytr notebooks with LSTM machine learning of the time series data. Compare predict levels of 2018 – 2020 drought to actual readings looking for deviations.
+The purpose is to find groundwater anomalies using machine learning.
  
 
-ToDo: Integrate temperature, soil moisture, solar radiation into the ML model training data
+##ToDo: Integrate temperature, soil moisture, solar radiation into the ML model training data

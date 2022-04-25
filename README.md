@@ -6,4 +6,4 @@ This project is designed to build a ETL pipeline of rainfall, surface/ground wat
 The purpose is to find groundwater anomalies using machine learning.
  
 
-##ToDo: Integrate temperature, soil moisture, solar radiation into the ML model training data
+ToDo: Integrate temperature, soil moisture, solar radiation into the ML model training data

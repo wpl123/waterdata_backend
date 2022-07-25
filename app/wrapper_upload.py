@@ -1,4 +1,4 @@
-# download_wrapper.py
+# wrapper_upload.py
 
 import csv
 import datetime
@@ -12,10 +12,9 @@ import pymysql
 #https://stackoverflow.com/questions/1260792/import-a-file-from-a-subdirectory#%E2%80%A6
 sys.path.extend([f'./{name}' for name in os.listdir(".") if os.path.isdir(name)])
 
-# print(sys.path)
 workingdir = "/home/admin/dockers/waterdata_backend/app/"
-#sys.path.append(workingdir + 'loading_scripts')
-# print(sys.path)
+
+
 
 from datetime import date
 
@@ -85,9 +84,17 @@ def load_webdata(df):
     uploads_dir = "/home/admin/dockers/waterdata_backend/data/uploads/"
     logs_dir = "/home/admin/dockers/waterdata_backend/data/uploads/logs/"
     logfile = logs_dir + str(datetime.datetime.now().strftime('%Y%m%d%H%M%S')) + ".log"
+    download_cronlogfile = "/home/admin/dockers/waterdata_backend/data/downloads/cronlog/download_error.log"
+    upload_cronlogfile = "/home/admin/dockers/waterdata_backend/data/uploads/cronlog/upload_error.log"
 
     check_file_writable(uploads_dir)
     check_file_writable(logs_dir)
+    if check_logfile(download_cronlogfile) == False:
+        if make_logfile(download_cronlogfile) == False:
+            print("ERROR: Email error - cron log file " + download_cronlogfile + " doesn't exist and cannot be created.")
+    if check_logfile(upload_cronlogfile) == False:
+        if make_logfile(upload_cronlogfile) == False:
+            print("ERROR: Email error - cron log file " + upload_cronlogfile + " doesn't exist and cannot be created.")        
 
     for i in range(len(df)):
     
@@ -112,16 +119,16 @@ def load_webdata(df):
             pass
 
         time.sleep(1)    
-    return logfile 
+    return logfile, download_cronlogfile, upload_cronlogfile
 
 
 def main():
     meter_df = get_meter_data()
-    log = load_webdata(meter_df)
+    log, download_cronlog, upload_cronlog = load_webdata(meter_df)
     
     if os.path.exists(log) == True:
         if check_logfile(log) == True:
-            assemble_email(log, 'ERROR: Waterdata database load errors found')
+            assemble_email(log, download_cronlog, upload_cronlog, 'ERROR: Waterdata database load errors found')
         # else:
         #     assemble_email(log, 'SUCCESS: Waterdata database load successful')
 

@@ -29,7 +29,7 @@ services:
 
   adminer:
     image: adminer
-#   restart: always
+    restart: always
     ports:
       - 8182:8080
     networks:
@@ -37,6 +37,8 @@ services:
       - backend
     volumes:
       - ./data:/data
+    depends_on:
+      - mariadb  
 
   fastapi:
     build: './dockerfiles/fastapi'
@@ -80,6 +82,7 @@ services:
 
   dash:
     build: './dockerfiles/dash'
+  #  image: wplpps/waterdata_dash:latest
     container_name: waterdata_dash_1 
     
     restart: always

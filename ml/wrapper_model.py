@@ -11,8 +11,12 @@ import numpy as np
 import pandas as pd
 import pymysql
 
+#https://stackoverflow.com/questions/1260792/import-a-file-from-a-subdirectory#%E2%80%A6
+sys.path.extend([f'./{name}' for name in os.listdir(".") if os.path.isdir(name)])
+
 # print(sys.path)
 workingdir = "/home/admin/dockers/waterdata_backend/ml/"
+
 #sys.path.append(workingdir + 'loading_scripts')
 # print(sys.path)
 
@@ -24,6 +28,14 @@ from flutils import *
 # from rainfall_model import *
 from surfacewater_model import *
 
+logs_dir = "/home/admin/dockers/waterdata_backend/data/ml/logs/"
+
+logfile = logs_dir + str(datetime.datetime.now().strftime('%Y%m%d%H%M%S')) + ".log"
+logger = logging
+logger.basicConfig(filename=logfile,level=logging.INFO)
+logger.info('-' * 80)
+logger.info(inspect.stack()[0][3] + ' Logging started at ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+logger.info('-' * 80)
 
 
 
@@ -61,21 +73,29 @@ def get_meter_data():
 
 def run_models(df):
 
-    downloads_dir = "/home/admin/dockers/waterdata_backend/data/downloads/"  #TODO: direcory structure for csvs
-    uploads_dir = "/home/admin/dockers/waterdata_backend/data/uploads/"
-    logs_dir = "/home/admin/dockers/waterdata_backend/data/uploads/logs/"
-    
-    check_file_writable(uploads_dir)
+    downloads_dir  = "/home/admin/dockers/waterdata_backend/data/ml/downloads/"  #TODO: direcory structure for csvs
+    uploads_dir    = "/home/admin/dockers/waterdata_backend/data/ml/uploads/"
+    meter_list     = []
+    logs_list      = [downloads_dir,uploads_dir,logs_dir]
+        
+    check_file_writable(downloads_dir)          #TODO: Is this necessary?
+    check_file_writable(uploads_dir)            #TODO: Is this necessary?
     check_file_writable(logs_dir)
 
-    for i in range(len(df)):
+    # df.iloc[i,1]  == meter_no
+    # df.iloc[i,10] == model_name
+    # df.iloc[i,11] == params i.e. meters to include
     
+    for i in range(len(df)):
+        
         # print(i, df.iloc[i, 1])
 
         if df.iloc[i, 3] == 100:             # test
             pass # print("test_format(df.iloc[i,10], df.iloc[i,11]), workingdir")        #TODO
-        elif df.iloc[i, 3] == 101:        # Stream flow. Pass meter_no, downloads_dir, uploads_dir, logs_dir
-            surfacewaterModel(df.iloc[i,1], downloads_dir, uploads_dir, logs_dir)
+        elif df.iloc[i, 3] == 101:        # Stream flow model. Pass meter_no, downloads_dir, uploads_dir, logs_dir
+            meter_list = df.loc[i, :].values.flatten().tolist()     # pass entire meters record from the df as a list argument
+            #surfacewaterModel(df.iloc[i,1], df.iloc[i,10],df.iloc[i,11], downloads_dir, uploads_dir, logs_dir)
+            surfacewaterModel(meter_list, logs_list)
         elif df.iloc[i, 3] == 102:        # Groundwater 2 column
             pass # groundwater2colLoad(df.iloc[i,1], downloads_dir, uploads_dir, logs_dir) 
         elif df.iloc[i, 3] == 103:        # Groundwater 3 column

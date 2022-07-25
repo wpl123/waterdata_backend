@@ -45,9 +45,9 @@ def main():
 
     url = 'https://realtimedata.waternsw.com.au/cgi/webservice.exe?{"function":"get_ts_traces","version":"2","params":{"site_list":"203056","start_time":"20101027000000","interval":"minute","var_list":"100.00,140.01,232","datasource":"A","end_time":"20101114000000","data_type":"mean","rounding":[{"zero_no_dec":"1","dec_first":"1","sigfigs":"4","variable":"100","decimals":"2"}],"multiplier":"1"}}'
     shorturl = 'https://realtimedata.waternsw.com.au/cgi/webservice.exe?{"function":"get_ts_traces","version":"2","params":{"site_list":"203056","start_time":"20101027000000","interval":"minute","var_list":"100.00,140.01,232","datasource":"A","end_time":"20101028000000","data_type":"mean","rounding":[{"zero_no_dec":"1","dec_first":"1","sigfigs":"4","variable":"100","decimals":"2"}],"multiplier":"1"}}'
-
+    testurl = 'https://realtimedata.waternsw.com.au/cgi/webservice.exe?{"function":"get_ts_traces","version":"2","params":{"site_list":"GW967137.1.1","start_time":"20220705000000","interval":"day","var_list":"110.00,2080.00","datasource":"CP","end_time":"20220705000000","data_type":"mean","rounding":[{"zero_no_dec":"1","dec_first":"1","sigfigs":"4","variable":"100","decimals":"3"}],"multiplier":"1"}}'
     #data = getResponseFromFile('./app/gibbo_code/downloads/test3.json') 
-    data = getResponseFromURL(shorturl) 
+    data = getResponseFromURL(testurl) 
     status = displayResponse(data)
 
 if __name__ == "__main__":

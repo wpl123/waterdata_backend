@@ -11,10 +11,7 @@ import csv
 #https://stackoverflow.com/questions/1260792/import-a-file-from-a-subdirectory#%E2%80%A6
 sys.path.extend([f'./{name}' for name in os.listdir(".") if os.path.isdir(name)])
 
-# print(sys.path)
 workingdir = "/home/admin/dockers/waterdata_backend/app/"
-# sys.path.append(workingdir + 'downloading_scripts')
-# print(sys.path)
 
 from datetime import date
 
@@ -42,17 +39,16 @@ def get_meter_data():                       # read in all the active meters
     try:
         with connection.cursor() as cursor:  # order by meter_type to make sure rainfall loads first
 
-
-            sql = ('''  SELECT *  
+            sql = ('''  SELECT *      #TODO: Find intervals, multipliers etc in the meter_type table
                         FROM   
                             `meters`   
                         WHERE  
-                            `get_data` = 1
-                        ORDER BY `meter_type` DESC    
+                            `get_data` = 1 
+                        ORDER BY `meter_type` DESC     
                         ''')
 
         df = pd.read_sql_query(sql, connection, parse_dates=['read_date','%Y-%m-%d'], coerce_float=True)
-
+        
     except:
         print("Error: unable to get meter data")
 
@@ -93,7 +89,7 @@ def scrape_webdata(df):
 
     for i in range(len(df)): #TODO: build loop for more than 1000 days
     
-        print('Processing download for meter ' + df.iloc[i,1] + ' at ' + df.iloc[i,10] )
+        # print('Processing download for meter ' + df.iloc[i,1] + ' at ' + df.iloc[i,10] )
         #check if file already exists for today
         if check_loaded(df.iloc[i,1], download_dir, df.iloc[i,12]) == True:
             continue

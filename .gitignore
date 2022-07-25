@@ -1,3 +1,4 @@
+.gitignore
 .git.old/
 .vscode
 .history
@@ -13,13 +14,7 @@ app/loading_scripts_rand
 app/test
 app/test2.py
 bkup
-data/downloads
-data/uploads
-data/bulk_load
-data/visualisations/elfin.csv
-data/visualisations/greengully.csv
-data/waterdata
-data/webscraping
+data
 database/
 data_csvs
 dockerfiles/mariadb/initialize-database.sql
@@ -35,3 +30,4 @@ vendor
 frontend/jupytr/visualisations/elfin.csv
 frontend/jupytr/visualisations/greengully.csv
 frontend/jupytr/ScrapeTest/twitter_scrape_test.ipynb
+lib/__pycache__

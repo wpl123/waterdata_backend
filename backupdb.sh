@@ -5,7 +5,7 @@ function backupdb() {
   docker-compose stop
   cd ..
   sudo tar cvzf waterdata.tar.gz --exclude './waterdata_frontend/venv' --exclude './waterdata_backend/venv' ./waterdata_backend ./waterdata_frontend
-  scp waterdata.tar.gz root@192.168.11.10:/mnt/Storage/Phil/backups
+  scp waterdata.tar.gz root@192.168.11.10:/mnt/storage/Secure2/Backup
   cd waterdata_backend
   docker-compose up -d
   exit

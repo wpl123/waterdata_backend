@@ -48,6 +48,7 @@ def surfacewater_scrape_and_write(meter_no, download_url, downloads_dir, logs_di
         
     today = datetime.datetime.today()       # - timedelta(days=1)
     sdate = check_start_end_dates('surfacewater', meter_no)
+    sdate = sdate.strftime('%d/%m/%Y')       # extract date from the SQLtuple
     edate = (today).strftime('%d/%m/%Y')  # edate == today
     ldate = (today).strftime('%Y%m%d')    # ldate = logfile date
     

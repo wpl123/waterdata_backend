@@ -6,8 +6,8 @@ import shutil
 import os, glob
 import pandas as pd
 
-from utils.dbutils import *
-from utils.flutils import *
+from dbutils import *
+from flutils import *
 
 def get_meters(mysql):
 
@@ -25,8 +25,7 @@ def get_meter_name(mysql):
 def get_meter_data(mysql, meter, mtype):
 
     sdate = '2008-01-01'    #TODO
-    #edate = (date.today - 1).strftime("%Y-%m-%d")
-    edate = '2022-07-15'    #TODO
+    edate = '2021-08-25'    #TODO - get/check last day. Change sql selection code to the Notebook sql
     mdf = []
 
     if mtype == 1:

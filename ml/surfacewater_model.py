@@ -1,5 +1,5 @@
 import pymysql
-import os, glob, datetime, csv
+import os, sys, glob, datetime, csv
 import logging
 
 import numpy as np
@@ -14,6 +14,12 @@ from sklearn.preprocessing import RobustScaler
 from pandas.plotting import register_matplotlib_converters
 
 from datetime import date, timedelta
+
+#https://stackoverflow.com/questions/1260792/import-a-file-from-a-subdirectory#%E2%80%A6
+sys.path.extend([f'./{name}' for name in os.listdir(".") if os.path.isdir(name)])
+
+from args_utils import *
+from ml_dbutils import *
 from dbutils import *
 from flutils import *
 
@@ -23,8 +29,39 @@ np.random.seed(RANDOM_SEED)
 tf.random.set_seed(RANDOM_SEED)
 
 
-def surfacewaterFormat(mysql, meter_no, downloads_dir, uploads_dir):
-    return(fname)
+def get_data(mysql):
+    
+    # df = df.drop(['bl_meter1','bl_ahd1','bl_meter2','bl_ahd2','bl_meter3','bl_ahd3','mean_temp3','bl_meter4','bl_ahd4','mean_temp4','sl_meter','rf_meter'],axis=1)
+    meters = pd.DataFrame(get_meters(mysql), columns=['meter_no','meter_name','meter_type','lat','lng', 'url'])
+    #df = pd.concat([get_meter_data(mysql, meters.iloc[i,0], meters.iloc[i,2]) for i in range(len(meters))])
+    df = pd.concat([get_meter_data(mysql, meters.iloc[i,0], meters.iloc[i,2]) for i in range(len(meters))])
+    df.columns = ['meter_no','read_date_idx','read_date','level']
+    df['read_date_idx'] = pd.to_datetime(df['read_date_idx'])
+    df.set_index('read_date_idx',inplace=True,drop=True)
+    
+    return df
+
+
+def get_meter_list(meters_to_model):
+    
+    for _meters in meters_to_model:
+        _meter = _meters.split(',')
+    return _meter
+
+
+def surfacewaterFormat(mysql, _meter_args, _logs_args):
+    #meter_no, model_name, meters_to_model
+    _meter_no            = split_args(_meter_args,1,2)        # get meter_no from the 
+    _meters_to_model     = _meter_args[11:12]      # i.e the params field with meters to model
+    
+    _meter = get_meter_list(_meters_to_model)
+        
+    for m in _meter:
+        df = get_data(mysql,m)
+        df1 = df1.append(df)
+        
+    
+    return(df1)
 
 
 def create_dataset(X, y, time_steps=1):
@@ -36,9 +73,9 @@ def create_dataset(X, y, time_steps=1):
         return np.array(Xs), np.array(ys)
 
 
-def model_run(formatted_csvfile):
+def model_run(df):
 
-    df = pd.read_csv(formatted_csvfile,parse_dates=['read_date'],index_col="read_date")
+    #df = pd.read_csv(formatted_csvfile,parse_dates=['read_date'],index_col="read_date")
 
     df = df.drop(['bl_meter1','bl_ahd1','bl_meter2','bl_ahd2','bl_meter3','bl_ahd3','mean_temp3','bl_meter4','bl_ahd4','mean_temp4','sl_meter','rf_meter'],axis=1)
 
@@ -109,20 +146,29 @@ def sw_load_model_data(mysql, meter_no, downloads_dir, uploads_dir, formatted_cs
     return None
 
 
-def surfacewaterModel(meter_no, downloads_dir, uploads_dir, logs_dir):
+def surfacewaterModel(meter_args, logs_args):
+        
     
+    meter_no            = split_args(meter_args,1,2)        # get meter_no from the 
+    downloads_dir       = split_args(logs_args,0,1)
+    uploads_dir         = split_args(logs_args,1,2)
     
-    setupLogging(meter_no, logs_dir)
+    #meter = meters.split(',')
+    
+    #setupLogging(meter_no, logs_dir)
     
     mysql = MySQLUtil()
-    mysql.dbConnect(host ='192.168.11.6', user = 'root', psw = 'water', db_name = 'waterdata', port=30000)
+    mysql.dbConnect()
+    #mysql.dbConnect(host ='192.168.11.6', user = 'root', psw = 'water', db_name = 'waterdata', port=30000)
     
     
-    formatted_csvfile = surfacewaterFormat(mysql, meter_no, downloads_dir, uploads_dir)
+    df = surfacewaterFormat(mysql, meter_args, logs_args)
+    print(df)
+   
     
-    if formatted_csvfile != None:
+    if df.empty != True:
         
-        sw_model = model_run(formatted_csvfile)
+        sw_model = model_run(df)
         sw_load = loadSWFormatted(mysql, meter_no, downloads_dir, uploads_dir, formatted_csvfile)
         upd_meter = updateMeter(mysql, meter_no)     # update meter record with the read date
         

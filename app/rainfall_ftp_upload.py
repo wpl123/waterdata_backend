@@ -141,7 +141,7 @@ def rainfallLoad(meter_no, params, downloads_dir, uploads_dir, logs_dir):
         upload_file   = downloads_dir + meter_no + '*'  
         move_upload   = moveFile(upload_file, upload_hist) # move formatted file and uploaded file to a new directory download_hist and upload_hist subdirectory
     else:
-        logging.error(inspect.stack()[0][3] + 'No download file for ' + meter_no + ' ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+        logging.error(inspect.stack()[0][3] + ' No download file for ' + meter_no + ' ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
 
     mysql.dbClose()
 

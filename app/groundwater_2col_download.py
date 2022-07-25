@@ -50,6 +50,7 @@ def groundwater_2col_scrape_and_write(meter_no, download_url, downloads_dir, log
     
     today = datetime.datetime.today()                       # - timedelta(days=1)
     sdate = check_start_end_dates('groundwater', meter_no)
+    sdate = sdate.strftime('%d/%m/%Y')       # extract date from the SQLtuple
     edate = (today).strftime('%d/%m/%Y')  # edate == today - 1
     ldate = (today).strftime('%Y%m%d')    # ldate = logfile date
     

@@ -2,6 +2,8 @@
 .git.old/
 .vscode
 .history
+*.bak
+*.new
 app/.vscode
 lib/dbconfig.py
 lib/emconfig.py

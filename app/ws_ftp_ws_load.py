@@ -33,7 +33,7 @@ def ws_data_format(meter_no,df1,download_dir):
 #   NARRABRI AIRPORT  03/06/2022                0.9   0.0            12.5     1.2       94       75         2.13           4.55        
 
     
-    logging.info(inspect.stack()[0][3] + ' Data format started ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+    write_log('Data format started')
     localdate = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         
     # initialise variables
@@ -71,7 +71,7 @@ def ws_data_format(meter_no,df1,download_dir):
 
 def update_database(mysql, meter_no, df):
 
-    logging.info(inspect.stack()[0][3] + ' Data load started ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+    write_log('Data load started')
     
     for i in range(len(df)):
         
@@ -90,9 +90,9 @@ def update_database(mysql, meter_no, df):
             
             result2 = mysql.execSQL(sql3)          # insert row
             if result2 == False:
-                logging.error(inspect.stack()[0][3] + ' Insert failed meter_no: {0} date: {1} {2} '.format(df.iloc[i,1],df.iloc[i,2],datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')))
+                write_log('Insert failed meter_no: {0} date: {1}'.format(df.iloc[i,1],df.iloc[i,2]))
         else:
-            logging.info(inspect.stack()[0][3] + ' Skipping duplicate id ' + str(dup_id) + ' for meter_no: ' + df.iloc[i,1] + ' date: ' + str(df.iloc[i,2]) + " " + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+            write_log('Skipping duplicate id ' + str(dup_id) + ' for meter_no: ' + df.iloc[i,1] + ' date: ' + str(df.iloc[i,2]))
             result2 = False    
     return result2
 
@@ -123,7 +123,7 @@ def getFile(ftp, filename):
         df = pd.DataFrame(lns, columns=['StationName','ObsDate','EvapoTranspiration','Rain','PanEvap', 'MaxTemp','MinTemp','MaxHumid', 'MinHumid', '10mWindSpeed','SolarRadiation']) #, date_parser=mydateparser
                         
     except Exception as e:
-        logging.error(inspect.stack()[0][3] + ' FTP of ' + filename + ' failed ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S') + str(e))
+        write_log('FTP of ' + filename + ' failed ' + str(e))
         
     return df
 
@@ -134,7 +134,7 @@ def getFile(ftp, filename):
 
 def match_files_to_load(s_month, s_year, file_list1):
     
-    logging.info(inspect.stack()[0][3] + ' Calculated starting month ' + str(s_month)  + ', year ' + str(s_year) +  ' at ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')) 
+    write_log('Calculated starting month ' + str(s_month)  + ', year ' + str(s_year)) 
     today = datetime.date.today()
     edate   = today.strftime('%Y%m%d%H%M%S')
     e_year  = edate[:4]
@@ -199,7 +199,7 @@ def ftp_extract(ftp,meter_no,params,downloads_dir):
         
         df = getFile(ftp,fname)
         
-        logging.info(inspect.stack()[0][3] + ' Data from file ' + downloads_dir + fname + ' extracted at ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')) 
+        write_log('Data from file ' + downloads_dir + fname + ' extracted at ') 
         downloaded_fname = downloads_dir + fname
         
         df1 = df1.append(df, ignore_index=True)
@@ -217,7 +217,7 @@ def ws_ftp_write(meter_no, download_url, params, download_dir, logs_dir):
     ftp = FTP(download_url,'anonymous', 'wplaird@bigpond.com')      # connect to host, default port, user anonymous, passwd anonymous@
     ftp.encoding='utf-8'                                            # force encoding for file name in utf-8 rather than default that is iso-8889-1
          
-    logging.info(inspect.stack()[0][3] + ' FTP session opened for meter ' + meter_no + ' url ' + download_url + ' at ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')) 
+    write_log('FTP session opened for meter ' + meter_no + ' url ' + download_url + ' at ') 
     downloaded_file, df_loaded = ftp_extract(ftp,meter_no,params,download_dir)
     ftp.quit()
     #FTP complete, process data
@@ -237,10 +237,10 @@ def ws_ftp_write(meter_no, download_url, params, download_dir, logs_dir):
             upd_meter = updateMeter(mysql, meter_no)
     
     else:
-        logging.error(inspect.stack()[0][3] + ' No weather station data for ' + meter_no + ' ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+        write_log('No weather station data for ' + meter_no)
 
     mysql.dbClose()
-    logging.info(inspect.stack()[0][3] + ' FTP download ended for meter ' + meter_no + ' at ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+    write_log('FTP download ended for meter ' + meter_no)
     
     
 

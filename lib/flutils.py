@@ -116,7 +116,7 @@ def mergeData(df0,df1,df2,df3):
 
 
 def moveFile(fnm, dnm):  
-    logging.info(inspect.stack()[0][3] + ' About to move {0} to directory name {1} at {2}'.format(fnm,dnm,datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')))
+    write_log('About to move {0} to directory name {1}'.format(fnm,dnm))
     dir_writeable = check_dir_writable(dnm)
     result = False
 
@@ -149,14 +149,20 @@ def setupLogging(meter_no, logs_dir):
     logging.info(inspect.stack()[0][3] + ' Logging started for ' + meter_no + ' at ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
 
 
-#def setupLogging_new(logs_dir):
-#    
-#    logfile = logs_dir + str(datetime.datetime.now().strftime('%Y%m%d%H%M%S')) + ".log"
-#    logger = logging
-#    logger.basicConfig(filename=logfile,level=logging.INFO)
-#    logger.info('-' * 80)
-#    logger.info(inspect.stack()[0][3] + ' Logging started at ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+def setupLogging2(logs_dir,prefix=''):
+    
+    logfile = logs_dir + prefix + str(datetime.datetime.now().strftime('%Y%m%d%H%M%S')) + ".log"
+    logger = logging
+    logger.basicConfig(filename=logfile,level=logging.INFO)
+    logger.info('-' * 80)
+    logger.info(inspect.stack()[0][3] + ' Logging started at ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+    logger.info('-' * 80)
+    return logfile
 
+
+def write_log(log_message): #TODO: Add DEBUG, INFO support    
+    logging.info(inspect.stack()[1][3] + ' ' + log_message + ' at ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+    
 
 
 

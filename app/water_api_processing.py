@@ -11,7 +11,7 @@ import json
 from datetime import timedelta
 from decimal import Decimal
 
-from wrapper_api_load import logger
+#from wrapper_api_load import logger
 from dbutils import *
 from flutils import *
 from dtutils import *
@@ -44,7 +44,7 @@ def make_sql2(tablename,operation,meter_no,read_date,calc_id,variable,level,qual
                     VALUES ({0}, '{1}', '{2}', {3}, '{4}', {5}, '{6}', {7}, '{8}', '{9}', '{10}')
                     ''' ).format(calc_id, meter_no, read_date, level[0], quality[0],level[1], quality[1],level[2], quality[2],comments, creation_date)
             else:
-                logger.info(inspect.stack()[0][3] + ' ERROR: Surface water Variable ' + variable + ' was not able to be handled on INSERT ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))    
+                write_log('ERROR: Surface water Variable ' + variable + ' was not able to be handled on INSERT')
         else: #operation = "UPDATE"
             if variable == "100.00":        
                 sql2 = (''' UPDATE `surfacewater` 
@@ -54,7 +54,7 @@ def make_sql2(tablename,operation,meter_no,read_date,calc_id,variable,level,qual
                         WHERE `meter_no` = '{8}' AND `read_date` = '{9}'    
                     ''' ).format(level[0], quality[0],level[1], quality[1],level[2], quality[2],comments2, creation_date, meter_no,read_date)
             else:
-                logger.info(inspect.stack()[0][3] + ' ERROR: Surface water Variable ' + variable + ' was not able to be handled on UPDATE ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))    
+                write_log('ERROR: Surface water Variable ' + variable + ' was not able to be handled on UPDATE')    
         
             
     elif tablename == "groundwater":  
@@ -76,7 +76,7 @@ def make_sql2(tablename,operation,meter_no,read_date,calc_id,variable,level,qual
                     VALUES ({0}, '{1}', '{2}', {3}, '{4}', '{5}', '{6}')
                     ''' ).format(calc_id, meter_no, read_date, level[2], quality[2],comments, creation_date)
             else:
-                logger.info(inspect.stack()[0][3] + ' ERROR: Groundwater Variable ' + variable + ' was not able to be handled on INSERT ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))    
+                write_log('ERROR: Groundwater Variable ' + variable + ' was not able to be handled on INSERT')
                 
         else: #operation = "UPDATE"
                 
@@ -95,7 +95,7 @@ def make_sql2(tablename,operation,meter_no,read_date,calc_id,variable,level,qual
                         WHERE `meter_no` = '{4}' AND `read_date` = '{5}'    
                     ''' ).format(level[2], quality[2],comments2, creation_date, meter_no,read_date)
             else:
-                logger.info(inspect.stack()[0][3] + ' ERROR: Groundwater Variable ' + variable + ' was not able to be handled on UPDATE ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))    
+                write_log('ERROR: Groundwater Variable ' + variable + ' was not able to be handled on UPDATE')    
           
     
     return sql2
@@ -114,7 +114,7 @@ def make_sql3(meter_no):
 
 def load_surfacewater_data(mysql,meter_no,df2):
 
-    logger.info(inspect.stack()[0][3] + ' Database load started ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+    write_log('Database load for ' + meter_no + 'started')
     
     for i in range(len(df2)):
         
@@ -130,7 +130,7 @@ def load_surfacewater_data(mysql,meter_no,df2):
             _level     = [df2.iloc[i,2],0,0]
             _quality   = [df2.iloc[i,3],0,0]   
         else:
-            logger.info(inspect.stack()[0][3] + ' ERROR: Surfacewater Variable ' + _variable + ' was not able to be handled' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))    
+            write_log('ERROR: Surfacewater Variable ' + _variable + ' was not able to be handled')    
           
         
         sql1   = make_sql1("surfacewater",meter_no,_read_date)
@@ -142,7 +142,7 @@ def load_surfacewater_data(mysql,meter_no,df2):
 
             result2 = mysql.execSQL(sql2)          # insert row
             if result2 == False:
-                logger.error(inspect.stack()[0][3] + ' Insert failed for meter_no:' + meter_no + " date:" + str(df2.iloc[i,0]) + " " + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+                write_log('Insert failed for meter_no:' + meter_no + " date: " + str(df2.iloc[i,0]))
         else:   
             
             #Check if contents of duplicate_record are the same as the latest readings (can change due to NSW Water sanity checks)
@@ -155,10 +155,12 @@ def load_surfacewater_data(mysql,meter_no,df2):
 
             result2 = mysql.execSQL(sql2)          # insert row
             if result2 == False:
-                logger.error(inspect.stack()[0][3] + ' Insert failed for meter_no:' + meter_no + " date:" + str(df2.iloc[i,0]) + " " + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+                write_log('Insert failed for meter_no:' + meter_no + " date: " + str(df2.iloc[i,0]))
         
         sql3 = make_sql3(meter_no)
-        result3 = mysql.execSQL(sql3) 
+        result3 = mysql.execSQL(sql3)
+        
+        write_log('Database load for ' + meter_no + ' completed ') 
                 
     return
 
@@ -166,7 +168,7 @@ def load_surfacewater_data(mysql,meter_no,df2):
     
 def load_groundwater_data(mysql,meter_no,df2):
     
-    logger.info(inspect.stack()[0][3] + ' Database load started ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+    write_log('Database load started for ' + meter_no)
     
     _elevation = 0.0
     _bl_bmp    = 0.0
@@ -193,7 +195,7 @@ def load_groundwater_data(mysql,meter_no,df2):
             _level     = [0,0,df2.iloc[i,2]]
             _quality   = [0,0,df2.iloc[i,3]]
         else:
-            logger.info(inspect.stack()[0][3] + ' ERROR: Groundwater Variable ' + _variable + ' was not able to be handled ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))     
+            write_log('ERROR: Groundwater Variable ' + _variable + ' was not able to be handled')
 
         sql1   = make_sql1("groundwater",meter_no,_read_date)
         dup    = getDuplicate(mysql, sql1)      # check for duplicates
@@ -204,7 +206,7 @@ def load_groundwater_data(mysql,meter_no,df2):
         
             result2 = mysql.execSQL(sql2)          # insert row
             if result2 == False:
-                logger.error(inspect.stack()[0][3] + ' Insert failed for meter_no: ' + meter_no + " date: " + str(df2.iloc[i,0]) + " " + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+                write_log('Insert failed for meter_no: ' + meter_no + " date: " + str(df2.iloc[i,0]))
         else:           
             
             #Check if contents of duplicate_record are the same as the latest readings (can change due to NSW Water sanity checks)
@@ -218,7 +220,7 @@ def load_groundwater_data(mysql,meter_no,df2):
 
             result2 = mysql.execSQL(sql2)          # insert row
             if result2 == False:
-                logger.error(inspect.stack()[0][3] + ' Insert failed for meter_no: ' + meter_no + " date: " + str(df2.iloc[i,0]) + " " + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+                write_log('Insert failed for meter_no: ' + meter_no + " date: " + str(df2.iloc[i,0]))
         
         
         sql3 = make_sql3(meter_no)
@@ -238,12 +240,12 @@ def load_JSON(_data,_meter_no,_tablename):
     try:
         waterdata = _data['return']['traces']     #TODO: Trap errors
     except LookupError as e:
-        logger.error(inspect.stack()[0][3] + " Lookup Error " + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S') + str(e))
+        write_log("Lookup Error " + str(e))
         # df = pd.DataFrame(columns=["Time","Variable","Value","Quality"],index=["Time"]) # taken from mergeData()
         # return df
         quit()
     except TypeError as e:
-        logger.error(inspect.stack()[0][3] + " Type Error " + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S') + str(e))
+        write_log("Type Error " + str(e))
         #df = pd.DataFrame(columns=["Time","Variable","Value","Quality"],index=["Time"]) # taken from mergeData()
         #return df
         quit()
@@ -285,23 +287,23 @@ def getResponse(url):
     try:  
         response = requests.get(url)
     except requests.exceptions.HTTPError as errh:
-        logger.error(inspect.stack()[0][3] + ' Http error: ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S') + str(errh))
+        write_log('Http error: ' + str(errh))
         return None
     except requests.exceptions.ConnectionError as errc:
-        logger.error(inspect.stack()[0][3] + ' Error Connecting: ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S') + str(errc))
+        write_log('Error Connecting: ' + str(errc))
         return None
     except requests.exceptions.Timeout as errt:
-        logger.error(inspect.stack()[0][3] + ' Timeout Error: ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S') + str(errt))
+        write_log('Timeout Error: ' + str(errt))
         return None
     except requests.exceptions.RequestException as err:
-        logger.error(inspect.stack()[0][3] + ' OOps: Something Else: ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S') + str(err))
+        write_log('OOps: Something Else: ' + str(err))
         return None
 
     jsonData = response.json() 
     if response and response.status_code == 200:
         return jsonData
     else:
-        logger.error(inspect.stack()[0][3] + " Error receiving data: " + response.status_code + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+        write_log("Error receiving data: " + response.status_code)
         return None
 
 
@@ -316,7 +318,7 @@ def download_apidata(download_url):
 
 def execute_api(url, meter_no, download_dir, tablename): 
     
-    logger.info(inspect.stack()[0][3] + ' Launching API for meter ' + meter_no + ' at ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+    write_log('Launching API for meter ' + meter_no)
     result = False
     
     df = pd.DataFrame()  #(columns=['v','t','q'])
@@ -324,14 +326,15 @@ def execute_api(url, meter_no, download_dir, tablename):
     
     data = download_apidata(url)
     if data == None:
-        logger.info(inspect.stack()[0][3] + ' ERROR: No JSON data for meter ' + meter_no + ' at ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+        write_log('ERROR: No JSON data for meter ' + meter_no)
         result = False   # Do somethng else
     else:
-        logger.info(inspect.stack()[0][3] + ' Returning JSON data for meter ' + meter_no + ' at ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+        write_log('Returning JSON data for meter ' + meter_no)
         df = load_JSON(data,meter_no,tablename) 
         df1 = df1.append(df, ignore_index=True)
         #result = write_csv_data(df1, meter_no, download_dir)   # Unhash for testing
-        
+    
+    write_log('Completed API processing for meter ' + meter_no)    
     
     return df1
 

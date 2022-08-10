@@ -17,12 +17,12 @@ class MySQLUtil():
             db=dbconfig.db_name, charset='utf8', 
             port=dbconfig.port)
             
-        logging.info(inspect.stack()[0][3] + ' Database opened ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+    #    write_log('Database opened')
    
    
     def dbClose(self):
         self.db.close()
-        logging.info(inspect.stack()[0][3] + ' Database closed ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+    #    write_log('Database closed')
         
 
     
@@ -37,8 +37,8 @@ class MySQLUtil():
             return True  
         except Exception as e:
             self.db.rollback()
-            logging.error(inspect.stack()[0][3] + ' execSQL failed ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S') + sql)
-            logging.error(inspect.stack()[0][3] + ' execSQL failed ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S') + str(e))
+            write_log('execSQL failed ' + sql)
+            write_log('execSQL failed ' + str(e))
 
             return False
 
@@ -52,7 +52,7 @@ class MySQLUtil():
             cursor.close()
             return results
         except Exception as e:
-            logging.error(inspect.stack()[0][3] + ' Search failed ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S') + str(e))
+            write_log('Search failed ' + str(e))
             return None
 
    
@@ -66,8 +66,8 @@ class MySQLUtil():
             cursor.close()
             return results
         except Exception as e:
-            logging.error(inspect.stack()[0][3] + ' Query String was ' + sql)
-            logging.error(inspect.stack()[0][3] + ' Search failed ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S') + str(e))
+            write_log('Query String was ' + sql)
+            write_log('Search failed '+ str(e))
             
             return None
 
@@ -105,11 +105,11 @@ def check_start_end_dates(tablename, meter_no, days_offset=1):
     if not qdate:   # i.e No records in tablename. First time the program has run for this meter - tuple is null
         qdate = mysql.execQuery(sql2) # look up last download in the meter table
         sdate = qdate[0]
-        logging.info(inspect.stack()[0][3] + " No downloaded data yet. Using meters last_download of " + str(sdate[0]) + " " + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+        write_log("No downloaded data yet. Using meters last_download of " + str(sdate[0]))
     else:    
     #print ("qdate: {0} sdate: {1} sdate[0]: {2}".format(qdate, sdate, sdate[0]))
         sdate = qdate[0]
-        logging.info(inspect.stack()[0][3] + " Resuming from last download record with offset of " + str(days_offset) + " days from " + str(sdate[0]) + " " + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+        write_log("Starting download for " + meter_no + " from " + str(sdate[0]) + " with offset of " + str(days_offset) +" days")
     mysql.dbClose()
     return (sdate[0] - datetime.timedelta(days=days_offset))
 

@@ -23,7 +23,7 @@ from flutils import *
 
 def rainfallFormat(mysql, meter_no, df1,download_dir):
     
-    logging.info(inspect.stack()[0][3] + ' Data format started ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+    write_log('Data format started')
     localdate = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     #ldate = (datetime.datetime.today() - timedelta(days=1)).strftime('%Y%m%d')
     
@@ -59,14 +59,14 @@ def rainfallFormat(mysql, meter_no, df1,download_dir):
 
     df2 = pd.DataFrame(rows,columns=['id','meter_no','read_date','rf_read1','dy_read1','ql_read1','comments','creation_date'])
     # write_csv_data(df2, meter_no, download_dir)     # Unhash for testing
-    logging.info(inspect.stack()[0][3] + ' Data format ended ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+    write_log('Data format ended')
     return(df2)
 
 
 
 def loadFormatted(mysql, meter_no, df):
 
-    logging.info(inspect.stack()[0][3] + ' Data load started ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+    write_log('Data load started')
     
     for i in range(len(df)):
         
@@ -85,9 +85,9 @@ def loadFormatted(mysql, meter_no, df):
             
             result2 = mysql.execSQL(sql3)          # insert row
             if result2 == False:
-                logging.error(inspect.stack()[0][3] + ' Insert failed meter_no: {0} date: {1} {2} '.format(df.iloc[i,1],df.iloc[i,2],datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')))
+                write_log('Insert failed meter_no: {0} date: {1}'.format(df.iloc[i,1],df.iloc[i,2]))
         else:
-            logging.info(inspect.stack()[0][3] + ' Skipping duplicate id ' + str(dup_id) + ' for meter_no: ' + df.iloc[i,1] + ' date: ' + str(df.iloc[i,2]) + " " + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+            write_log('Skipping duplicate id ' + str(dup_id) + ' for meter_no: ' + df.iloc[i,1] + ' date: ' + str(df.iloc[i,2]))
             result2 = False    
     return result2
 
@@ -117,7 +117,7 @@ def getFile(ftp, filename):
         
     except Exception as e:
         df = pd.DataFrame(columns=['IndexNo', 'SensorType', 'SensorDataType', 'SiteIdType', 'SiteId', 'ObservationTimestamp', 'RealValue', 'Unit', 'SensorParam1', 'SensorParam2', 'Quality', 'Comment'])    
-        logging.error(inspect.stack()[0][3] + ' FTP of ' + filename + ' failed ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S') + str(e))
+        write_log('FTP of ' + filename + ' failed ' + str(e))
     
     return df
     
@@ -136,7 +136,7 @@ def ftp_extract(ftp,meter_no,params,downloads_dir):
 
     for fname in fnmatch.filter(files, params):
         data = getFile(ftp,fname)
-        logging.info(inspect.stack()[0][3] + ' Data from file ' + downloads_dir + fname + ' extracted at ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')) 
+        write_log('Data from file ' + downloads_dir + fname + ' extracted') 
         downloaded_fname = downloads_dir + fname
         df_loaded = load_data(data, meter_no)
 
@@ -146,16 +146,16 @@ def ftp_extract(ftp,meter_no,params,downloads_dir):
 
 def rainfall_ftp_write(meter_no, download_url, params, download_dir, logs_dir):
 
-    setupLogging(meter_no, logs_dir)
+    #logfile = setupLogging(logs_dir)
     
     to_day = datetime.datetime.today()
     #ldate = (to_day).strftime('%Y%m%d')    # ldate = logfile date   
 
     ftp = FTP(download_url)        # connect to host, default port
-    logging.info(inspect.stack()[0][3] + ' FTP session opened for meter ' + meter_no + ' url ' + download_url + ' at ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')) 
+    write_log('FTP session opened for meter ' + meter_no + ' url ' + download_url) 
     downloaded_file, df_loaded = ftp_extract(ftp,meter_no,params,download_dir)
     ftp.quit()
-    logging.info(inspect.stack()[0][3] + ' Removing ' + downloaded_file + ' at ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')) 
+    write_log('Removing ' + downloaded_file) 
     os.remove(downloaded_file)
     #FTP complete, process data
    
@@ -170,10 +170,10 @@ def rainfall_ftp_write(meter_no, download_url, params, download_dir, logs_dir):
             upd_meter = updateMeter(mysql, meter_no)
     
     else:
-        logging.error(inspect.stack()[0][3] + ' No rainfall data for ' + meter_no + ' ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+        write_log('No rainfall data for ' + meter_no)
 
     mysql.dbClose()
-    logging.info(inspect.stack()[0][3] + ' FTP download ended for meter ' + meter_no + ' at ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+    write_log('FTP download ended for meter ' + meter_no)
     
     
 

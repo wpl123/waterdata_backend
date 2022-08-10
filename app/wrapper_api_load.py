@@ -16,7 +16,7 @@ from sklearn import multiclass
 sys.path.extend([f'./{name}' for name in os.listdir(".") if os.path.isdir(name)])
 
 workingdir = "/home/admin/dockers/waterdata_backend/app/"
-logs_dir = "/home/admin/dockers/waterdata_backend/data/api/logs/"
+#logs_dir = "/home/admin/dockers/waterdata_backend/data/api/logs/"
 
 from datetime import date
 from flutils import *
@@ -30,12 +30,12 @@ from ws_ftp_ws_load import *
 #from rainfall_ftp_download import *
 #from rainfall_ftp_upload import *
 
-logfile = logs_dir + str(datetime.datetime.now().strftime('%Y%m%d%H%M%S')) + ".log"
-logger = logging
-logger.basicConfig(filename=logfile,level=logging.INFO)
-logger.info('-' * 80)
-logger.info(inspect.stack()[0][3] + ' Logging started at ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
-logger.info('-' * 80)
+#logfile = logs_dir + str(datetime.datetime.now().strftime('%Y%m%d%H%M%S')) + ".log"
+#logger = logging
+#logger.basicConfig(filename=logfile,level=logging.INFO)
+#logger.info('-' * 80)
+#logger.info(inspect.stack()[0][3] + ' Logging started at ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+#logger.info('-' * 80)
 
 #API Info
 #
@@ -96,14 +96,14 @@ def set_api_url(meter_no, url, varlist, tablename):
     url5 = url4.replace("EDATE", edate)
     url6 = url5.replace("SITELIST", sitelist)
     
-    logger.info(inspect.stack()[0][3] + " Found for " + meter_no + ' URL ' + url6 + ' ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+    write_log(" Found for " + meter_no + ' URL ' + url6)
     
     return(url6)
     
     
 
 
-def download_data(df,download_dir):
+def download_data(df,download_dir,logs_dir):
     
     # TODO: Integrate ftp downloads dir with the api downloads structure
     
@@ -185,14 +185,15 @@ def get_meter_data():                       # read in all the active meters
 def main():
     
     download_dir = "/home/admin/dockers/waterdata_backend/data/api/"
+    logs_dir = "/home/admin/dockers/waterdata_backend/data/api/logs/"
     
-    
+    logfile = setupLogging2(logs_dir)
     check_file_writable(download_dir)
     check_file_writable(logs_dir)
     
     meter_df = get_meter_data()    
-    download_data(meter_df,download_dir)
-    logger.info(inspect.stack()[0][3] + ' SUCCESS: Finished water download at ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+    download_data(meter_df,download_dir,logs_dir)
+    write_log('SUCCESS: Finished water download')
    
     if check_logfile(logfile) == True:
         assemble_email(logfile, 'ERROR: Waterdata download errors found')

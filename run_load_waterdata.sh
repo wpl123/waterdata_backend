@@ -33,7 +33,7 @@ PID=$!
 date >> $APILOADDIR/apiload_error.log 2>&1
 echo "--------------------------------------------------------------------------------------" >> $APILOADDIR/apiload_error.log 2>&1
 source /home/admin/dockers/waterdata_backend/venv/bin/activate && \
-/home/admin/dockers/waterdata_backend/venv/bin/python /home/admin/dockers/waterdata_backend/app/wrapper_api_load.py \
+/home/admin/dockers/waterdata_backend/venv/bin/python /home/admin/dockers/waterdata_backend/app/wrapper_api_ftp_load.py \
 >> $APILOADDIR/apiload_error.log 2>&1
 echo "--------------------------------------------------------------------------------------" >> $APILOADDIR/apiload_error.log 2>&1
 

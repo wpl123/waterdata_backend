@@ -114,7 +114,7 @@ def make_sql3(meter_no):
 
 def load_surfacewater_data(mysql,meter_no,df2):
 
-    write_log('Database load for ' + meter_no + 'started')
+    write_log('Database load for ' + meter_no + ' started')
     
     for i in range(len(df2)):
         
@@ -168,7 +168,7 @@ def load_surfacewater_data(mysql,meter_no,df2):
     
 def load_groundwater_data(mysql,meter_no,df2):
     
-    write_log('Database load started for ' + meter_no)
+    write_log('Database load for ' + meter_no + ' started')
     
     _elevation = 0.0
     _bl_bmp    = 0.0

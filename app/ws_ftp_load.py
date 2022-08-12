@@ -64,7 +64,7 @@ def ws_data_format(meter_no,df1,download_dir):
     df2 = df2.replace(' ', -99.00) #        Set unknown to -99.00 instead of zero and nans while at it
     df2 = df2.fillna(-99.00)              
     #write_csv_data(df2, meter_no, download_dir)    #Unhash for testing
-    logging.info(inspect.stack()[0][3] + ' Data format ended ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
+    write_log('Data format ended')
     return(df2)
 
 
@@ -210,8 +210,6 @@ def ftp_extract(ftp,meter_no,params,downloads_dir):
 
 def ws_ftp_write(meter_no, download_url, params, download_dir, logs_dir):
 
-    #setupLogging(meter_no, logs_dir)
-    
     to_day = datetime.datetime.today()
     
     ftp = FTP(download_url,'anonymous', 'wplaird@bigpond.com')      # connect to host, default port, user anonymous, passwd anonymous@
@@ -223,8 +221,7 @@ def ws_ftp_write(meter_no, download_url, params, download_dir, logs_dir):
     #FTP complete, process data
     
     os.remove(downloaded_file)
-    #logging.info(inspect.stack()[0][3] + ' Removing ' + downloaded_file + ' at ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')) 
-    
+        
    
     mysql = MySQLUtil()
     mysql.dbConnect()

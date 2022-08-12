@@ -16,33 +16,20 @@ from sklearn import multiclass
 sys.path.extend([f'./{name}' for name in os.listdir(".") if os.path.isdir(name)])
 
 workingdir = "/home/admin/dockers/waterdata_backend/app/"
-#logs_dir = "/home/admin/dockers/waterdata_backend/data/api/logs/"
 
 from datetime import date
 from flutils import *
 from emutils import *
 import dbconfig
 
-from water_api_processing import *
+from water_api_ftp_processing import *
 from rainfall_ftp_load import *
-from ws_ftp_ws_load import *
-
-#from rainfall_ftp_download import *
-#from rainfall_ftp_upload import *
-
-#logfile = logs_dir + str(datetime.datetime.now().strftime('%Y%m%d%H%M%S')) + ".log"
-#logger = logging
-#logger.basicConfig(filename=logfile,level=logging.INFO)
-#logger.info('-' * 80)
-#logger.info(inspect.stack()[0][3] + ' Logging started at ' + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S'))
-#logger.info('-' * 80)
+from ws_ftp_load import *
 
 #API Info
 #
 # Info available here --> https://kisters.com.au/doco/hydllp.htm
 # https://realtimedata.waternsw.com.au/cgi/webservice.exe?{"function":"get_variable_list","version":"1","params":{"site_list":"GW967137.1.1","datasource":"A"}}
-
-
 
 
 def set_api_url(meter_no, url, varlist, tablename):

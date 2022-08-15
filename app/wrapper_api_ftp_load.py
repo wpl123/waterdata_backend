@@ -22,7 +22,7 @@ from flutils import *
 from emutils import *
 import dbconfig
 
-from water_api_ftp_processing import *
+from water_api_processing import *
 from rainfall_ftp_load import *
 from ws_ftp_load import *
 
@@ -83,7 +83,7 @@ def set_api_url(meter_no, url, varlist, tablename):
     url5 = url4.replace("EDATE", edate)
     url6 = url5.replace("SITELIST", sitelist)
     
-    write_log(" Found for " + meter_no + ' URL ' + url6)
+    write_log("Found for " + meter_no + ' URL ' + url6)
     
     return(url6)
     
@@ -122,6 +122,14 @@ def download_data(df,download_dir,logs_dir):
             url = set_api_url(df.iloc[i,1], df.iloc[i,10], df.iloc[i,15], "groundwater")
             df_download = execute_api(url, df.iloc[i,1], download_dir, "groundwater")
             
+        elif df.iloc[i,3] == 14:        # Groundwater 1 column. Pass url, meter_no, download_dir
+            url = set_api_url(df.iloc[i,1], df.iloc[i,10], df.iloc[i,15], "groundwater")
+            df_download = execute_api(url, df.iloc[i,1], download_dir, "groundwater")
+            
+        elif df.iloc[i,3] == 15:        # TODO: Groundwater Bore Pressure. Pass url, meter_no, download_dir
+            url = set_api_url(df.iloc[i,1], df.iloc[i,10], df.iloc[i,15], "groundwater")
+            df_download = execute_api(url, df.iloc[i,1], download_dir, "groundwater")
+                    
         elif df.iloc[i, 3] == 4:        # Rainfall column
             rainfall_ftp_write(df.iloc[i,1],df.iloc[i,10],df.iloc[i,11],download_dir, logs_dir)
         

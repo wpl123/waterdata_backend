@@ -44,7 +44,7 @@ def make_sql2(tablename,operation,meter_no,read_date,calc_id,variable,level,qual
                     VALUES ({0}, '{1}', '{2}', {3}, '{4}', {5}, '{6}', {7}, '{8}', '{9}', '{10}')
                     ''' ).format(calc_id, meter_no, read_date, level[0], quality[0],level[1], quality[1],level[2], quality[2],comments, creation_date)
             else:
-                write_log('ERROR: Surface water Variable ' + variable + ' was not able to be handled on INSERT')
+                write_log('ERROR: No SQL INSERT available for meter ' + meter_no + ' variable ' + variable)
         else: #operation = "UPDATE"
             if variable == "100.00":        
                 sql2 = (''' UPDATE `surfacewater` 
@@ -54,7 +54,7 @@ def make_sql2(tablename,operation,meter_no,read_date,calc_id,variable,level,qual
                         WHERE `meter_no` = '{8}' AND `read_date` = '{9}'    
                     ''' ).format(level[0], quality[0],level[1], quality[1],level[2], quality[2],comments2, creation_date, meter_no,read_date)
             else:
-                write_log('ERROR: Surface water Variable ' + variable + ' was not able to be handled on UPDATE')    
+                write_log('ERROR: No SQL UPDATE available for meter ' + meter_no + ' variable ' + variable)    
         
             
     elif tablename == "groundwater":  
@@ -75,8 +75,14 @@ def make_sql2(tablename,operation,meter_no,read_date,calc_id,variable,level,qual
                             `mean_temp`, `ql_temp`, `comments`, `creation_date`)
                     VALUES ({0}, '{1}', '{2}', {3}, '{4}', '{5}', '{6}')
                     ''' ).format(calc_id, meter_no, read_date, level[2], quality[2],comments, creation_date)
+            elif variable == "121.00":    
+                sql2 = (''' INSERT 
+                    INTO `groundwater` (`id`, `meter_no`, `read_date`, 
+                            `mean_temp`, `ql_temp`, `comments`, `creation_date`)
+                    VALUES ({0}, '{1}', '{2}', {3}, '{4}', '{5}', '{6}')
+                    ''' ).format(calc_id, meter_no, read_date, level[2], quality[2],comments, creation_date)    
             else:
-                write_log('ERROR: Groundwater Variable ' + variable + ' was not able to be handled on INSERT')
+                write_log('ERROR: No SQL INSERT available for meter ' + meter_no + ' variable ' + variable)
                 
         else: #operation = "UPDATE"
                 
@@ -94,8 +100,14 @@ def make_sql2(tablename,operation,meter_no,read_date,calc_id,variable,level,qual
                             `mean_temp` = {0}, `ql_temp` = '{1}', `comments` = '{2}', `creation_date` = '{3}'
                         WHERE `meter_no` = '{4}' AND `read_date` = '{5}'    
                     ''' ).format(level[2], quality[2],comments2, creation_date, meter_no,read_date)
+            elif variable == "121.00":
+                sql2 = (''' UPDATE `groundwater` 
+                        SET  
+                            `mean_temp` = {0}, `ql_temp` = '{1}', `comments` = '{2}', `creation_date` = '{3}'
+                        WHERE `meter_no` = '{4}' AND `read_date` = '{5}'    
+                    ''' ).format(level[2], quality[2],comments2, creation_date, meter_no,read_date)    
             else:
-                write_log('ERROR: Groundwater Variable ' + variable + ' was not able to be handled on UPDATE')    
+                write_log('ERROR: No SQL UPDATE available for meter ' + meter_no + ' variable ' + variable)    
           
     
     return sql2
@@ -140,6 +152,7 @@ def load_surfacewater_data(mysql,meter_no,df2):
             _calc_id = lastID(mysql, "surfacewater") + 1
             sql2     = make_sql2("surfacewater","INSERT",meter_no,_read_date,_calc_id, _variable, _level, _quality) 
 
+            #TODO: take account of the empty table.
             result2 = mysql.execSQL(sql2)          # insert row
             if result2 == False:
                 write_log('Insert failed for meter_no:' + meter_no + " date: " + str(df2.iloc[i,0]))
@@ -191,12 +204,16 @@ def load_groundwater_data(mysql,meter_no,df2):
         if _variable == "110.00":                    # Update different parts of the record based on the JSON variable returned
             _level     = [df2.iloc[i,2],_bl_ahd,0]
             _quality   = [df2.iloc[i,3],_ql_ahd,0]
-        elif _variable == "2080.00":
+        elif _variable == "2080.00":                # Update Water Temp
             _level     = [0,0,df2.iloc[i,2]]
             _quality   = [0,0,df2.iloc[i,3]]
+        elif _variable == "121.00":                 # TODO: Put Bore Pressure into Water Temp for the time being
+            _level     = [0,0,df2.iloc[i,2]]
+            _quality   = [0,0,df2.iloc[i,3]]    
         else:
             write_log('ERROR: Groundwater Variable ' + _variable + ' was not able to be handled')
-
+            continue
+        
         sql1   = make_sql1("groundwater",meter_no,_read_date)
         dup    = getDuplicate(mysql, sql1)      # check for duplicates
             
@@ -204,6 +221,7 @@ def load_groundwater_data(mysql,meter_no,df2):
             _calc_id = lastID(mysql, "groundwater") + 1
             sql2     = make_sql2("groundwater", "INSERT", meter_no,_read_date,_calc_id, _variable, _level, _quality) 
         
+            #TODO: take account of the empty table.
             result2 = mysql.execSQL(sql2)          # insert row
             if result2 == False:
                 write_log('Insert failed for meter_no: ' + meter_no + " date: " + str(df2.iloc[i,0]))
@@ -240,15 +258,15 @@ def load_JSON(_data,_meter_no,_tablename):
     try:
         waterdata = _data['return']['traces']     #TODO: Trap errors
     except LookupError as e:
-        write_log("Lookup Error " + str(e))
-        # df = pd.DataFrame(columns=["Time","Variable","Value","Quality"],index=["Time"]) # taken from mergeData()
-        # return df
-        quit()
+        write_log("Lookup Error " + str(e) + " " + str(_data))
+        df = pd.DataFrame(columns=["Time","Variable","Value","Quality"],index=["Time"]) # taken from mergeData()
+        return df
+        #quit()
     except TypeError as e:
-        write_log("Type Error " + str(e))
-        #df = pd.DataFrame(columns=["Time","Variable","Value","Quality"],index=["Time"]) # taken from mergeData()
-        #return df
-        quit()
+        write_log("Type Error " + str(e) + + " " + str(_data))
+        df = pd.DataFrame(columns=["Time","Variable","Value","Quality"],index=["Time"]) # taken from mergeData()
+        return df
+        #quit()
     else:     
 #    print(waterdata)
         # logger.info(inspect.stack()[0][3] + " Data Returned " + datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S') + "\n\n" + str(waterdata))
@@ -272,14 +290,15 @@ def load_JSON(_data,_meter_no,_tablename):
 
         
         df = pd.DataFrame(tracelist,columns=["Time","Variable","Value","Quality"]) #
+        df1 = df[(df.Value > "0.000") & (df.Quality != "255")]    # remove data that is flagged as 'no data' quality with a value of 0
         
         if _tablename == "groundwater":  
-            result = load_groundwater_data(mysql,_meter_no,df)
+            result = load_groundwater_data(mysql,_meter_no,df1)
         elif _tablename == "surfacewater":   
-            result = load_surfacewater_data(mysql,_meter_no,df) 
+            result = load_surfacewater_data(mysql,_meter_no,df1) 
     
     mysql.dbClose()
-    return df     
+    return df1     
 
 
       
@@ -332,7 +351,7 @@ def execute_api(url, meter_no, download_dir, tablename):
         write_log('Returning JSON data for meter ' + meter_no)
         df = load_JSON(data,meter_no,tablename) 
         df1 = df1.append(df, ignore_index=True)
-        #result = write_csv_data(df1, meter_no, download_dir)   # Unhash for testing
+#        result = write_csv_data(df1, meter_no, download_dir)   # Unhash for testing
     
     write_log('Completed API processing for meter ' + meter_no)    
     

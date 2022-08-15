@@ -11,6 +11,7 @@ app/__pycache__
 app-api/__pycache__
 app/dev/gibbo_code/downloads
 app/dev/realtimewater_api/data/test/downloads
+app/downloading_scripts
 app/formatting_scripts_rand
 app/loading_scripts_rand
 app/test
@@ -19,6 +20,8 @@ bkup
 data
 database/
 data_csvs
+dbtmp
+dev
 dockerfiles/mariadb/initialize-database.sql
 dockerfiles/mariadb/initialize-database.sql.bak
 dockerfiles/mariadb/src/initialize-database.sql

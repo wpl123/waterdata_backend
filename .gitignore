@@ -36,3 +36,13 @@ frontend/jupytr/visualisations/elfin.csv
 frontend/jupytr/visualisations/greengully.csv
 frontend/jupytr/ScrapeTest/twitter_scrape_test.ipynb
 lib/__pycache__
+frontend/jupytr/visualisations/elfin_groundwater.jpg
+frontend/jupytr/visualisations/elfin_surfacewater.jpg
+frontend/jupytr/visualisations/elfin_temp.jpg
+frontend/jupytr/visualisations/Green_Gully_groundwater.jpg
+frontend/jupytr/visualisations/Green_Gully_surfacewater.jpg
+frontend/jupytr/visualisations/Green_Gully_temp.jpg
+frontend/jupytr/visualisations/mt_kaputar_rainfall.jpg
+frontend/jupytr/visualisations/Plumb_Rd_Bore_Level.jpg
+frontend/jupytr/visualisations/Plumb_Rd_Bore_Pressure.jpg
+frontend/jupytr/visualisations/.ipynb_checkpoints/PlumbRd-checkpoint.ipynb

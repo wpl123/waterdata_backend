@@ -151,8 +151,7 @@ def load_surfacewater_data(mysql,meter_no,df2):
         if dup == None:
             _calc_id = lastID(mysql, "surfacewater") + 1
             sql2     = make_sql2("surfacewater","INSERT",meter_no,_read_date,_calc_id, _variable, _level, _quality) 
-
-            #TODO: take account of the empty table.
+            
             result2 = mysql.execSQL(sql2)          # insert row
             if result2 == False:
                 write_log('Insert failed for meter_no:' + meter_no + " date: " + str(df2.iloc[i,0]))

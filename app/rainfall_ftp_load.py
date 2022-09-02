@@ -66,7 +66,7 @@ def rainfallFormat(mysql, meter_no, df1,download_dir):
 
 def loadFormatted(mysql, meter_no, df):
 
-    write_log('Data load started')
+    write_log('Database load started')
     
     for i in range(len(df)):
         
@@ -87,8 +87,9 @@ def loadFormatted(mysql, meter_no, df):
             if result2 == False:
                 write_log('Insert failed meter_no: {0} date: {1}'.format(df.iloc[i,1],df.iloc[i,2]))
         else:
-            write_log('Skipping duplicate id ' + str(dup_id) + ' for meter_no: ' + df.iloc[i,1] + ' date: ' + str(df.iloc[i,2]))
+# Debug          write_log('Skipping duplicate id ' + str(dup_id) + ' for meter_no: ' + df.iloc[i,1] + ' date: ' + str(df.iloc[i,2]))
             result2 = False    
+    write_log('Database load for ' + meter_no + ' completed ')
     return result2
 
 
@@ -173,7 +174,7 @@ def rainfall_ftp_write(meter_no, download_url, params, download_dir, logs_dir):
         write_log('No rainfall data for ' + meter_no)
 
     mysql.dbClose()
-    write_log('FTP download ended for meter ' + meter_no)
+    write_log('Completed FTP processing for meter ' + meter_no)
     
     
 

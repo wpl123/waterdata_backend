@@ -78,6 +78,7 @@ selenium==3.141.0
 six==1.15.0
 sklearn==0.0
 sortedcontainers==2.3.0
+SQLAlchemy==1.4.22
 tensorboard==2.4.1
 tensorboard-plugin-wit==1.8.0
 tensorflow-estimator==2.4.0

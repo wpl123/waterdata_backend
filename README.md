@@ -6,7 +6,7 @@ This repository contains all the code required to create and interegate a MySQL 
 # Brief explanation of the supdirectories;
 
 - app - Python Code to extract, transform and load groundwater, surfacewater and rainfall data from public sources and store in a MySQL database
-- app-api - Flask Api to enable access to MySQL db
+- app-api - FastAPI to enable access to MySQL db
 - dockerfiles - dockerfiles for system build
 - frontend - Jupytr Notebooks to plot water data and implement machine learning (LSTM) to investigate anomalies of groundwater data
 - frontend/app-dash - dashboard in Plotly Dash
@@ -17,10 +17,10 @@ This repository contains all the code required to create and interegate a MySQL 
 - meter_types
 - errors
 
-# To update run the database 
+# To update the database
 
-- run the script run_load_waterdata.sh 
-- or via cron --> $WATER_DIR/waterdata_backend/run_load_waterdata.sh >> $WATER_DIR/waterdata_backend/data/downloads/cronlog/cron.log 2>&
+- One off; run the script run_load_waterdata.sh 
+- Daily; cron --> $WATER_DIR/waterdata_backend/run_load_waterdata.sh >> $WATER_DIR/waterdata_backend/data/downloads/cronlog/cron.log 2>&
 
 Links to data;
 
@@ -29,7 +29,7 @@ Links to data;
 - qld - https://water-monitoring.information.qld.gov.au/
 
 
-Link to API Reference - https://water-monitoring.information.qld.gov.au/wini/Documents/RDMW_API_doco.pdf
+Link to Kysters API Reference - https://water-monitoring.information.qld.gov.au/wini/Documents/RDMW_API_doco.pdf
 
 
 # Brief Explanation of meter and meter_types tables

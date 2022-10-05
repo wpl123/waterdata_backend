@@ -46,7 +46,7 @@ services:
     container_name: waterdata_fastapi_1cd 
     restart: always
     volumes: 
-      - ./app-api:/app/app
+      - ./sql-app:/app/app
      
     environment:
       - ENVIRONMENT=dev
@@ -117,7 +117,7 @@ networks:
 
 volumes:
   app:
-  app-api:
+  sql-api:
   app-dash:  
   database:
   data:

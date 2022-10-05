@@ -7,6 +7,7 @@ import os, glob
 import pandas as pd
 
 from utils.dbutils import *
+#from utils.dtutils.py import *
 from utils.flutils import *
 
 def get_meters(mysql):
@@ -25,7 +26,9 @@ def get_meter_name(mysql):
 def get_meter_data(mysql, meter, mtype):
 
     sdate = '2008-01-01'    #TODO
-    edate = '2021-08-25'    #TODO
+    #edate = '2021-08-25'    #TODO
+    #edate = convert_string_date2(date.today)
+    edate = datetime.datetime.strptime((date.today - 2),"%Y-%m-%d")
     mdf = []
 
     if mtype == 1:

@@ -9,6 +9,9 @@ lib/dbconfig.py
 lib/emconfig.py
 app/__pycache__
 sql-app/__pycache__
+frontend/__pycache__
+frontend/app-dash/__pycache__
+frontend/app-dash/pages/__pycache__
 app-api1
 app/dev/gibbo_code/downloads
 app/dev/realtimewater_api/data/test/downloads

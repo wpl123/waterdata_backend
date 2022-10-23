@@ -53,6 +53,7 @@ from correlations import create_page_correlations
 from groundwater import create_page_groundwater
 from surfacewater import create_page_surfacewater
 from rainfall import create_page_rainfall
+from datatable import create_page_datatable
 from sat_map import get_info
 
 
@@ -66,20 +67,17 @@ app = dash.Dash(__name__, suppress_callback_exceptions=True, external_stylesheet
 
 df_meters, df = read_db()
 meter_list = list(df_meters['meter_no'])
-# add Elfin Surfacewater Data
-dfe = df[df['meter_no'] == '419051']
 
-# add Kaputar Rainfall Data
-dfk = df[df['meter_no'] == '054151-2']
+
+dfe = df[df['meter_no'] == '419051']     # add Elfin Surfacewater Data
+dfk = df[df['meter_no'] == '054151-2']    # add Kaputar Rainfall Data
 
 dfek = pd.merge(dfe,dfk,left_index=True, right_index=True)
 
 sdate = df.iloc[0,1]
 edate = df.iloc[-1,1]
 
-#
 
- 
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
     dcc.Loading(
@@ -96,7 +94,7 @@ app.layout = html.Div([
 ])
 
 
-#TODO: Setup spinner
+
 #TODO: Use callback to populate dropdown
 #@app.callback(Output("monitors", "children"), 
 #              [Input("monitor", "hover_feature")])
@@ -104,6 +102,11 @@ app.layout = html.Div([
 #    if feature is not None:
 # #       print(feature)
 #        return get_info(feature)
+
+@app.callback(Output("zone", "children"), [Input("zones", "hover_feature")])
+def zone_hover(feature):
+    return f"{feature['properties']['name']}"
+
 
 
 @app.callback(
@@ -115,6 +118,7 @@ app.layout = html.Div([
    )
 
 
+
 def store_data(meter_no1, meter_no2):
     
     dff1 = df[(df['meter_no'] == meter_no1)]      
@@ -122,6 +126,7 @@ def store_data(meter_no1, meter_no2):
     
     dff3 = pd.merge(dff1,dff2,left_index=True, right_index=True)
     df2 = pd.merge(dff3,dfek,left_index=True, right_index=True)
+    df2.drop(['read_date_y_x','read_date_x_y','read_date_y_y'],inplace=True,axis=1)
     
     return df2.to_dict('records')
 
@@ -133,19 +138,26 @@ def store_data(meter_no1, meter_no2):
             ])
 def display_page(pathname,data):
     
-    if pathname == '/':
-        return create_page_home(data)
-    if pathname == '/summary':
-        return create_page_summary(data)
-    if pathname == '/correlations':
-        return create_page_correlations(data)
-    if pathname == '/groundwater':
-        return create_page_groundwater(data)
-    if pathname == '/surfacewater':
-        return create_page_surfacewater(data)
-    if pathname == '/rainfall':
-        return create_page_rainfall(data)
+    if len(data) != 0:
+        
+        if pathname == '/':
+            return create_page_home(data)
+        if pathname == '/summary':
+            return create_page_summary(data)
+        if pathname == '/correlations':
+            return create_page_correlations(data)
+        if pathname == '/groundwater':
+            return create_page_groundwater(data)
+        if pathname == '/surfacewater':
+            return create_page_surfacewater(data)
+        if pathname == '/rainfall':
+            return create_page_rainfall(data)
+        if pathname == '/datatable':
+            return create_page_datatable(data)
+        else:
+            return create_page_home(data)
     else:
+        pathname = '/'
         return create_page_home(data)
 
 

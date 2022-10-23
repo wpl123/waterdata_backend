@@ -1,5 +1,5 @@
 import dash
-from dash import html, dcc
+from dash import html, dcc, dash_table
 import dash_bootstrap_components as dbc
 import plotly.express as px
 from plotly.subplots import make_subplots
@@ -27,14 +27,13 @@ def make_rainfall_graph(data):
     dff,dfe,dfk = df_split(df)
     m1 = str(dff.iloc[0,0])
     m2 = str(dff.iloc[0,3])
+   
     
+    fig = px.line(dfk, x='read_date', y='level') # ,color='#0508fb' ,color='blue'
+    fig.update_layout(hovermode='closest',xaxis_title='054151-2 (mm)',yaxis_title='Date',title='Rainfall Bar Plot',title_font_size=30) # ,height=400, width=465 / height=250, width=250 400
     
-    fig = px.scatter(dff, x='level_x', y='level_y')
-    fig.update_layout(hovermode='closest',xaxis_title=m1,yaxis_title=m2,title='Scatter Plot',title_font_size=30) # ,height=400, width=465 / height=250, width=250 400
-    #
-    #fig2 = px.imshow(df_corr)
-    #fig2.update_layout(hovermode='closest',title='Correlation Heatmap',title_font_size=30) #,height=500, width=500
-    
+    fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor='LightPink')
+    fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='LightPink')
     
     return fig
 

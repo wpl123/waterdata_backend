@@ -28,12 +28,21 @@ def make_groundwater_graph(data):
     m1 = str(dff.iloc[0,0])
     m2 = str(dff.iloc[0,3])
     
+    #Todo: 2 Separate Graphs
+    fig = make_subplots(
+                rows=1, cols=1,row_heights=[25]) # ,subplot_titles=("Groundwater")
     
-    fig = px.scatter(dff, x='level_x', y='level_y')
-    fig.update_layout(hovermode='closest',xaxis_title=m1,yaxis_title=m2,title='Scatter Plot',title_font_size=30) # ,height=400, width=465 / height=250, width=250 400
-    #
-    #fig2 = px.imshow(df_corr)
-    #fig2.update_layout(hovermode='closest',title='Correlation Heatmap',title_font_size=30) #,height=500, width=500
+    fig.append_trace(go.Scatter(x=dff['read_date_x'], y=dff['level_x'],name=m1), row=1, col=1) #TODO: Row Heights
+    fig.append_trace(go.Scatter(x=dff['read_date_x'], y=dff['level_y'],name=m2), row=1, col=1)
+    
+    fig.update_yaxes(title_text="(AHD)", row=1, col=1)
+    
+    fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor='LightPink')
+    fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='LightPink')
+    
+    
+    fig.update_layout(title_text="Groundwater Bore Comparison",title_font_size=30)  #TODO: validate groundwater # ,height=875,width=930
+    
     
     
     return fig

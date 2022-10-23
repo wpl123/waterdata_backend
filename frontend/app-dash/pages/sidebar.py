@@ -15,7 +15,17 @@ from utils.read_database import *
 def create_meter_selector():
     
     meters = read_meters()
-    meter_list = list(meters['meter_no'])
+    fields = []
+    meter_list = []
+    METER_TYPES_LIST=[12,13,14]
+    GET_DATA = 1
+    
+    meters = meters.query('meter_type.isin(@METER_TYPES_LIST) and get_data == @GET_DATA',engine='python')
+    
+    for i in range(len(meters)):
+        fields = [meters.iloc[i,0],meters.iloc[i,1]]
+        meter_list.append(fields)
+        
     markdown_text = """
     Select two groundwater monitoring bores that you wish to compare from the dropdowns below.
     
@@ -23,14 +33,15 @@ def create_meter_selector():
     
     
         
-    layout = dbc.Container([
+    layout = dbc.Col([
         dcc.Markdown(children=markdown_text),
         dbc.Row(
             html.Div([
                 dcc.Dropdown(
                 id='xaxis-column',
-                options=[{'label': i, 'value': i} for i in meter_list],
-                value='GW967137.1.1'
+                options=[{'label': meter_list[i][0], 'value': meter_list[i][0], 'title': meter_list[i][1]} for i in range(len(meter_list))],
+                value='GW967137.1.1',
+                persistence=True
                 ),
             ], className="dash-bootstrap", style={'width':'100%'}),    
         ),
@@ -38,8 +49,9 @@ def create_meter_selector():
             html.Div([
                 dcc.Dropdown(
                     id='yaxis-column',
-                    options=[{'label': i, 'value': i} for i in meter_list],
-                    value='GW967137.2.2'
+                    options=[{'label': meter_list[i][0], 'value': meter_list[i][0], 'title': meter_list[i][1]} for i in range(len(meter_list))],
+                    value='GW967137.2.2',
+                    persistence=True
                 ),
             ], className="dash-bootstrap", style={'width':'100%'}),    
         ),
@@ -89,6 +101,7 @@ def create_sidebar(markdown_text):
                             dbc.DropdownMenuItem("Groundwater", href='/groundwater'), # Hyperlink item that appears in the dropdown menu
                             #dbc.DropdownMenuItem(divider=True), 
                             dbc.DropdownMenuItem("Rainfall", href='/rainfall'), # Hyperlink item that appears in the dropdown menu
+                            dbc.DropdownMenuItem("Data Table", href='/datatable'), # Hyperlink item that appears in the dropdown menu
                             dbc.DropdownMenuItem(divider=True), 
                         ],
                     ),  

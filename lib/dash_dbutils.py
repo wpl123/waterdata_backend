@@ -12,13 +12,13 @@ from flutils import *
 
 def get_meters(mysql):
 
-    sql1 = ('''  SELECT `meter_no`, `meter_name`, `meter_type`, `meter_lat` AS `lat`, `meter_long` AS `lon`, `download_url` AS `url` FROM `meters` ''')
+    sql1 = ('''  SELECT `meter_no`, `meter_name`, `meter_type`, `meter_lat` AS `lat`, `meter_long` AS `lon`, `download_url` AS `url`, `get_data` FROM `meters` ''')
     result = mysql.execQuery(sql1)
     return(result)
 
 def get_meter_name(mysql):
 
-    sql1 = ('''  SELECT `meter_no`, `meter_name`, `meter_type`, `meter_lat` AS `lat`, `meter_long` AS `lon` FROM `meters` ''')
+    sql1 = ('''  SELECT `meter_no`, `meter_name`, `meter_type`, `meter_lat` AS `lat`, `meter_long` AS `lon`, `get_data` FROM `meters` ''')
     result = mysql.execQuery(sql1)
     return(result)
 

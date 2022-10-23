@@ -36,6 +36,7 @@ def create_page_home(data):
         dbc.Row([
             nav
         ]),
+        html.Hr(),
         dbc.Row(
             children=[
                 dbc.Col(
@@ -52,5 +53,34 @@ def create_page_home(data):
     ])
     return layout
     
+def create_page_home2(data):
+    layout = dbc.Container([
+        dbc.Row([
+            nav
+        ]),
+        html.Hr(),
+        dbc.Row(
+            children=[
+                dbc.Col(
+                    [
+                        side
+                    ],xs=4, sm=4, md=2,lg=2, xxl=2
+                ),
+                #dbc.Col(
+                #    children=[
+                #        dbc.Row(sat_map)
+                #    ],xs=8, sm=8, md=10,lg=10, xxl=10
+                #)
+                dbc.Col(
+                [
+                    dash.page_container
+                ],xs=8, sm=8, md=10,lg=10, xxl=10)
+                    
+            ]
+        )
+        
+    ])
+    return layout
 
-
+#,xs=8, sm=8, md=10,lg=10, xxl=10
+#xs=4, sm=4, md=2,lg=2, xxl=2
